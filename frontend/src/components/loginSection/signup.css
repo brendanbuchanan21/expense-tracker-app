@@ -1,0 +1,71 @@
+
+.welcome-div {
+    padding-top: 10rem;
+}
+.welcome-div h1 {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+form h3 {
+    text-align: center;
+}
+.form-card {
+    width: 20rem;
+    height: auto;
+    border: 2px solid grey;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 0.75rem;
+    
+}
+form input {
+    width: 90%;
+    border: none;
+    background: none;
+    border-bottom: 1px solid grey;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+form input:focus {
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: none;
+}
+form input:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+button {
+    margin: 0 auto;
+    background-color: var(--orange);
+    border: none;
+    padding: .5rem;
+    width: 90%;
+}
+
+.already-have-account-div {
+    width: 70%;
+    margin: 0 auto;
+}
+.already-have-account-div p {
+    font-size: .9rem;
+    color: grey;
+}
+.span-sign-in {
+    color: white;
+}

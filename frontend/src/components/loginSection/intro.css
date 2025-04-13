@@ -1,0 +1,71 @@
+
+section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.intro-div {
+    width: 26rem;
+    margin: 0 auto;
+    padding-top: 10rem;
+    display: flex;
+    justify-content: center;
+}
+.intro-div h1 {
+    font-size: 2rem;
+}
+.card-container {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+
+}
+.card {
+    border: 1px solid grey;
+    border-radius: 4px;
+    width: 14rem;
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.dot-container {
+    height: 3rem;
+    gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.dot.active {
+    background-color: var(--orange);
+    display: inline-block;
+}
+.get-started-div {
+    padding-top: 2rem;
+    margin: 0 auto;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.get-started-div button {
+    height: 2rem;
+    width: 14rem;
+    background-color: var(--orange);
+    border: none;
+    border-radius: 3rem;
+    cursor: pointer;
+}
+.get-started-div button:hover {
+    background-color: var(--hover-orange);
+  }

@@ -1,0 +1,9 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+:root {
+  --orange: #ff3503;
+  --hover-orange: #e52f00;
+}

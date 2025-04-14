@@ -6,6 +6,7 @@ import SignUpComponent from './components/loginSection/signup'
 import CheckEmailComponent from './components/loginSection/checkEmail'
 import VerifiedRedirect from './components/loginSection/verifiedRedirect'
 
+ 
 function App() {
 
   return (

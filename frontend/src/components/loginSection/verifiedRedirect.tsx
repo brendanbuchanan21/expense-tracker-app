@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/userSlice";
+
 
 const VerifiedRedirect = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,6 +16,7 @@ const VerifiedRedirect = () => {
       if (user) {
         await user.reload();
         if (user.emailVerified) {
+          dispatch(setUser({uid: user.uid, username: user.displayName ?? ""}));
           navigate("/picture"); // or /picture or whatever
         } else {
           navigate("/check-your-email");

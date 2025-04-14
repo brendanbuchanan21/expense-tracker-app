@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import './signup.css'
 import { useState } from 'react';
 import { auth } from './firebase.tsx';
@@ -35,6 +35,10 @@ const handleSubmitForm = async (e: any) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+
+    await updateProfile(user, {
+      displayName: username
+    })
     await sendEmailVerification(user, {
         url: "http://localhost:5173/verified-redirect",
     });

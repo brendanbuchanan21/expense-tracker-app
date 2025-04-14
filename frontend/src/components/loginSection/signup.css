@@ -69,3 +69,7 @@ button {
 .span-sign-in {
     color: white;
 }
+.span-sign-in:hover {
+    color: grey;
+    cursor: pointer;
+}

@@ -57,6 +57,10 @@ button {
     padding: .5rem;
     width: 90%;
 }
+button:hover {
+    background-color: var(--hover-orange);
+    cursor: pointer;
+}
 
 .already-have-account-div {
     width: 70%;
@@ -72,4 +76,30 @@ button {
 .span-sign-in:hover {
     color: grey;
     cursor: pointer;
+}
+
+.error-message-div {
+    border: 1px solid #CC0000;
+    width: 90%;
+    margin: 0 auto;
+    background-color: rgba(255, 82, 82, 0.1); /* soft red */
+    color: #FF5252; /* clean red text */
+    border: 1px solid rgba(255, 82, 82, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.success-message-div {
+    width: 90%; 
+    margin: 0 auto;
+    background-color: rgba(76, 175, 80, 0.1); /* soft green */
+    color: #4CAF50; /* clean green text */
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
 }

@@ -1,0 +1,30 @@
+.check-email-section {
+    padding-top: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .check-email-section .form-card {
+    width: 24rem;
+    border: 2px solid grey;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  .check-email-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--orange); /* assuming you have a theme variable */
+  }
+  
+  .check-email-section p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #ccc;
+  }
+  

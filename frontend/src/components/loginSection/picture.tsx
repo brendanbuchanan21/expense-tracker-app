@@ -3,10 +3,13 @@ import camera from '../../images/camera.svg'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import React from 'react'
+import { addProfilePicture } from '../../redux/userSlice'
+import { useDispatch } from 'react-redux'
 
 const PictureComponent = () => {
 
 const navigate = useNavigate();
+const dispatch = useDispatch();
 
 const [preview, setPreview] = useState<string | null>(null);
 const [image, setImage] = useState<File | null>(null);
@@ -15,6 +18,7 @@ const [image, setImage] = useState<File | null>(null);
 
 const handleSkip = () => {
 
+  
   navigate('/dashboard');
 }
 
@@ -27,7 +31,11 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 }
 
 const handleSave = () => {
-    console.log("image ready to be uplaoded:", image);
+
+  //we are going to send the image to the backend, return it as string url
+  // then we will dispatch to the store
+  
+  console.log("image ready to be uplaoded:", image);
 }
 
 

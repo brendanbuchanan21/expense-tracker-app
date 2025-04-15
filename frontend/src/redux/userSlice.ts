@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface UserState {
     uid: string | null;
     username: string | null;
+    profilePictureUrl: string | null;
 }
 
 const initialState: UserState = {
     uid: null,
     username: null,
+    profilePictureUrl: null,
 };
 
 
@@ -23,10 +25,15 @@ const userSlice = createSlice({
         clearUser: (state) => {
             state.uid = null;
             state.username = null;
+            state.profilePictureUrl = null;
+        },
+        addProfilePicture: (state, action: PayloadAction<{profilePictureUrl: string}>) => {
+            state.profilePictureUrl = action.payload.profilePictureUrl;
         }
+
     }
 })
 
 export default userSlice.reducer;
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser, addProfilePicture } = userSlice.actions;

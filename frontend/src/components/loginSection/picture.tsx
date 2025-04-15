@@ -5,6 +5,7 @@ import { useState } from 'react'
 import React from 'react'
 import { addProfilePicture } from '../../redux/userSlice'
 import { useDispatch } from 'react-redux'
+import { usePostUserDataMutation } from '../../redux/apis/userDataApi'
 
 const PictureComponent = () => {
 
@@ -13,6 +14,9 @@ const dispatch = useDispatch();
 
 const [preview, setPreview] = useState<string | null>(null);
 const [image, setImage] = useState<File | null>(null);
+
+//rtk querys
+const [postUserDataMutation] = usePostUserDataMutation();
 
 
 
@@ -30,10 +34,18 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     }
 }
 
-const handleSave = () => {
+const handleSave = async () => {
+  if (!image) return;
 
-  //we are going to send the image to the backend, return it as string url
-  // then we will dispatch to the store
+  const formData = new FormData();
+  formData.append('profile_image', image);
+
+  try {
+    const data = await postUserDataMutation(formData).unwrap()
+    console.log(data, 'image successfully returned');
+  } catch (error) {
+    console.error(error);
+  }
   
   console.log("image ready to be uplaoded:", image);
 }

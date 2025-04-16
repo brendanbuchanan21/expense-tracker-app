@@ -78,7 +78,7 @@ const handleSubmitForm = async (e: any) => {
             )}
             
             <div className='already-have-account-div'>
-                <p>Already have an account? <span className='span-sign-in'>Sign in</span></p>
+                <p>Already have an account? <span className='span-sign-in' onClick={() => navigate('/login')}>Sign in</span></p>
             </div>
             {error && (
                 <div className='error-message-div'>

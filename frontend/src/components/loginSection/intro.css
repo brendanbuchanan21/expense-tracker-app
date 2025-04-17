@@ -69,3 +69,25 @@ section {
 .get-started-div button:hover {
     background-color: var(--hover-orange);
   }
+
+  .login-text-div {
+    padding-top: 1rem;
+    width: 20rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .login-text-div p {
+ font-size: .9rem;
+ color: grey;
+  }
+  .login-text {
+    color: white;
+    cursor: pointer;
+  }
+  .login-text:hover {
+    color: grey;
+    cursor: pointer;
+  }
+  .sign-in-header-text {
+    text-align: center;
+  }

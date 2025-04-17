@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 
 export const userDataApi = createApi({
     reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/', prepareHeaders: async (headers) => {
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/finances/', prepareHeaders: async (headers) => {
         const auth = getAuth();
         const user = auth.currentUser;
         if (user) {

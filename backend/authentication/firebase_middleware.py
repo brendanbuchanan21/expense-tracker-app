@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials, auth
 from django.http import JsonResponse
 import os
+from rest_framework.authentication import BaseAuthentication
 
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -15,32 +16,41 @@ def verify_firebase_token(token):
     try:
 
         decoded_token = auth.verify_id_token(token)
+        print(f"here is the decoded token: {decoded_token}")
         return decoded_token
     except Exception as e:
+        print(f"error during token verification: {e}")
         return None
     
 
-class FirebaseAuthenticationMiddleware: 
-    def __init__(self, get_response):
-        self.get_response = get_response
-    
-    def __call__(self, request):
 
+class FirebaseWrapper: 
+    def __init__(self, decoded_token):
+        self.token = decoded_token
+        self.uid = decoded_token.get('uid')
+        self.is_authenticated = True
+
+
+
+
+class FirebaseAuthentication(BaseAuthentication):
+    def authenticate(self, request):
         auth_header = request.headers.get("Authorization")
 
-        if auth_header:
-            try: 
+        if not auth_header:
+            return None  # No token, authentication not required
 
-                token = auth_header.split(" ")[1]
-                decoded_token = verify_firebase_token(token)
-                if decoded_token:
+        try:
+            token = auth_header.split(" ")[1]  # Extract the token from the Authorization header
+            decoded_token = verify_firebase_token(token)  # Verify the token with Firebase
 
-                    request.user = decoded_token
-                else: 
-                    return JsonResponse({"error": "Invalid or expired token"}, status=401)
-            except IndexError: 
-                return JsonResponse({"error": "authorization token format is incorrect"}, status=400)
-            
-        
-        response = self.get_response(request)
-        return response
+            if decoded_token:
+                print(f"here is the decoded token: {decoded_token}")  # Debug output for decoded token
+                return (FirebaseWrapper(decoded_token), token)  # Return decoded token and the raw token for later use
+            else:
+                return None  # Invalid or expired token
+        except IndexError:
+            raise JsonResponse({"error": "authorization token format is incorrect"}, status=400)
+        except Exception as e:
+            print(f"error during token verification: {e}")
+            raise JsonResponse({"error": "Invalid or expired token"}, status=401)

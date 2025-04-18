@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'authentication.firebase_middleware.FirebaseAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'backend_project.urls'

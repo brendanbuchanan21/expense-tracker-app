@@ -12,3 +12,11 @@ class ProfilePicture(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile Picture"
+    
+
+class FirebaseUser(models.Model):
+    firebase_uid = models.CharField(max_length=128, unique=True)
+    username = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.username

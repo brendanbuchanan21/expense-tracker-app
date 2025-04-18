@@ -1,11 +1,14 @@
 import firebase_admin
 from firebase_admin import credentials, auth
 from django.http import JsonResponse
-from django.conf import settings
+import os
 
 
-cred = credentials.Certificate("../secrets/firebase_admin_key.json")
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
+firebase_credentials_path = os.path.join(project_root, 'secrets', 'firebase_admin_key.json')
+
+cred = credentials.Certificate(firebase_credentials_path)
 firebase_admin.initialize_app(cred)
 
 def verify_firebase_token(token):

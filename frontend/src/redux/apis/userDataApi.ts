@@ -9,6 +9,7 @@ export const userDataApi = createApi({
         const user = auth.currentUser;
         if (user) {
             const token = await user.getIdToken();
+            console.log('Token attached:', token);
             headers.set('Authorization', `Bearer ${token}`)
         }
         return headers;
@@ -17,7 +18,7 @@ export const userDataApi = createApi({
  endpoints: (builder) => ({
     postUserData: builder.mutation({
         query: (body) => ({
-           url: 'userData/',
+           url: 'user/',
            method: "POST",
            body,
     

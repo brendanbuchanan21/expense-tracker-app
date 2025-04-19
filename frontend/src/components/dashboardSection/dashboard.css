@@ -1,0 +1,30 @@
+.home-section {
+ padding-top: 10rem;
+}
+.main-container {
+    border: 1px solid grey;
+    width: 40rem;
+    margin: 0 auto;
+}
+
+.dashboard-header-div {
+    border: 2px solid lime;
+    padding-left: 1rem;
+    width: 90%;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+.activity-container {
+    height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-container{ 
+    border-top: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    justify-content: center;
+}

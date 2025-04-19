@@ -19,7 +19,6 @@ const [postUserProfilePicture] = usePostUserProfilePictureMutation();
 
 const handleSkip = () => {
 
-  
   navigate('/dashboard');
 }
 
@@ -41,6 +40,8 @@ const handleSave = async () => {
   try {
     const data = await postUserProfilePicture(formData).unwrap();
     console.log(data, 'image successfully returned');
+
+    navigate('/dashboard')
 
   } catch (error) {
     console.error(error);

@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface UserState {
     uid: string | null;
     username: string | null;
-    profilePictureUrl: string | null;
+    profilePictureUrl: File | null;
 }
 
 const initialState: UserState = {
@@ -27,7 +27,7 @@ const userSlice = createSlice({
             state.username = null;
             state.profilePictureUrl = null;
         },
-        addProfilePicture: (state, action: PayloadAction<{profilePictureUrl: string}>) => {
+        addProfilePicture: (state, action: PayloadAction<{profilePictureUrl: File}>) => {
             state.profilePictureUrl = action.payload.profilePictureUrl;
         }
 

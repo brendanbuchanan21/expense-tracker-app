@@ -3,20 +3,18 @@ import camera from '../../images/camera.svg'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import React from 'react'
-import { addProfilePicture } from '../../redux/userSlice'
 import { useDispatch } from 'react-redux'
-import { usePostUserDataMutation } from '../../redux/apis/userDataApi'
+import { usePostUserDataMutation, usePostUserProfilePictureMutation } from '../../redux/apis/userDataApi'
 
 const PictureComponent = () => {
 
 const navigate = useNavigate();
-const dispatch = useDispatch();
 
 const [preview, setPreview] = useState<string | null>(null);
 const [image, setImage] = useState<File | null>(null);
 
-//rtk querys
-const [postUserDataMutation] = usePostUserDataMutation();
+//rtk query
+const [postUserProfilePicture] = usePostUserProfilePictureMutation();
 
 
 
@@ -41,8 +39,10 @@ const handleSave = async () => {
   formData.append('profile_image', image);
 
   try {
-    const data = await postUserDataMutation(formData).unwrap()
+    const response = await postUserProfilePicture(formData).unwrap();
+    const data = await response.json();
     console.log(data, 'image successfully returned');
+
   } catch (error) {
     console.error(error);
   }

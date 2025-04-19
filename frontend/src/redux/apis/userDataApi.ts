@@ -24,8 +24,15 @@ export const userDataApi = createApi({
     
     })
     }),
+    postUserProfilePicture: builder.mutation({
+        query: (formData) => ({
+            url: '/profile-picture',
+            method: "POST",
+            body: formData,
+        })
+    })
     //another mutation
 }),
 });
 
-export const { usePostUserDataMutation } = userDataApi;
+export const { usePostUserDataMutation, usePostUserProfilePictureMutation } = userDataApi;

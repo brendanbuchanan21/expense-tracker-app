@@ -10,6 +10,7 @@ import Dashboard from './components/dashboardSection/dashboard'
 import BalanceHome from './components/balances/balanceHome'
 import ExpensesHome from './components/expenses/expensesHome'
 import AddAccount from './components/balances/addAccount'
+import { useEffect } from 'react'
 
 
 function App() {

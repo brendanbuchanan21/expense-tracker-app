@@ -2,22 +2,57 @@ import './dashboard.css'
 import { useState } from "react"
 import Navbar from './navbar';
 import BalanceHome from '../balances/balanceHome';
+import ExpensesHome from '../expenses/expensesHome';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
 const [tabSelected, setTabSelected] = useState("Activity");
 
+const navigate = useNavigate();
+
     return (
        <section className="home-section">
         <div className='main-container'>
 
-        <div className="dashboard-header-div">
-            <h3>{tabSelected}</h3>
-        </div>
+        
 
-        <div className='activity-container'>
+        {tabSelected === "Activity" && (
+            <>
+            <div className="dashboard-header-div">
+            <h3>{tabSelected}</h3>
+             </div>
+            <div className='display-container'>
             <p>get started to see your activity</p>
-        </div>
+           </div>
+            </>
+        )}
+
+        {tabSelected === "Balances" && (
+            <>
+            <div className="dashboard-header-div">
+            <h3>{tabSelected}</h3>
+            <button className='balance-header-add-btn' onClick={() => navigate('/add-account')}>Add</button>
+             </div>
+
+             <div>
+                <BalanceHome />
+             </div>
+            </>
+        )}
+
+        {tabSelected === "Expenses" && (
+            <>
+           <div className="dashboard-header-div">
+            <h3>{tabSelected}</h3>
+             </div>
+
+            <div>
+                <ExpensesHome />
+            </div>
+            </>
+        )}
+        
         <Navbar tabSelected={tabSelected} setTabSelected={setTabSelected}/>
 
         </div>

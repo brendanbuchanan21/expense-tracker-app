@@ -69,7 +69,7 @@ const handleSubmitForm = async (e: any) => {
                 <input type="email" value={email} placeholder='email' onChange={(e) => setEmail(e.target.value)}/>
                 <input type="password" value={password} placeholder='password' onChange={(e) => setPassword(e.target.value)}/>
                 <input type="password" value={confirmPassword} placeholder='confirm password' onChange={(e) => setConfirmPassword(e.target.value)}/>
-                <button type='submit' disabled={loading} >SIGN UP</button>
+                <button type='submit' disabled={loading} className='sign-up-btn'>SIGN UP</button>
             </form>
             {loading && (
                <div className='spinner-parent'>

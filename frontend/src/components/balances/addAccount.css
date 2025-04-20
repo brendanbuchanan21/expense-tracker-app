@@ -1,0 +1,65 @@
+#add-account-section {
+    border: 2px solid lime;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10rem;
+}
+.add-account-main-container {
+    border: 2px solid blue;
+    width: 30rem;
+    height: auto;
+}
+.add-account-header-div {
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#add-account-cancel-btn {
+    background: none;
+    border: none;
+    color: grey;
+}
+#add-account-save-btn {
+    background: none;
+    border: none;
+    color: var(--orange);
+}
+.account-name-div {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+}
+.bank-input {
+    background-color: hsl(0, 0%, 20%);
+    border: none;
+    height: 2rem;
+    border-bottom: .5px solid hsl(0, 0%, 60%);
+    color: white;
+    padding: .2rem;
+}
+
+.starting-balance-div {
+    display: flex;
+    flex-direction: row;
+}
+.starting-balance-input {
+    background-color: black;
+    padding: .2rem;
+    height: 1.8rem;
+    width: 50%;
+    border: none;
+    border-right: .5px solid hsl(0, 0%, 60%);
+}
+#space-div {
+    height: 2rem;
+    background-color: hsl(0, 0%, 10%);
+}
+.account-assign-div {
+    display: flex;
+    flex-direction: column;
+}
+
+

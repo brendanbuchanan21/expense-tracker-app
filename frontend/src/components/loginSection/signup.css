@@ -50,7 +50,7 @@ form input:-webkit-autofill {
     -webkit-text-fill-color: white !important;
     transition: background-color 5000s ease-in-out 0s;
   }
-button {
+.sign-up-btn {
     margin: 0 auto;
     background-color: var(--orange);
     border: none;

@@ -13,8 +13,22 @@
     width: 90%;
     border: none;
     border-bottom: 1px solid grey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-.activity-container {
+.balance-header-add-btn {
+    background: none;
+    color: var(--orange);
+    border: none;
+    font-size: 1rem;
+}
+.balance-header-add-btn:hover {
+    background: none;
+    color: var(--hover-orange);
+    text-decoration: underline;
+}
+.display-container {
     height: 20rem;
     display: flex;
     align-items: center;
@@ -27,4 +41,16 @@
     flex-direction: row;
     gap: 4rem;
     justify-content: center;
+}
+
+.active {
+    color: var(--orange);
+    cursor: pointer;
+}
+.navbar-title {
+    cursor: pointer;
+}
+.navbar-title:hover {
+    cursor: pointer;
+    color: hsl(0, 0%, 50%);
 }

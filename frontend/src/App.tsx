@@ -7,7 +7,11 @@ import CheckEmailComponent from './components/loginSection/checkEmail'
 import VerifiedRedirect from './components/loginSection/verifiedRedirect'
 import LoginComponent from './components/loginSection/login'
 import Dashboard from './components/dashboardSection/dashboard'
- 
+import BalanceHome from './components/balances/balanceHome'
+import ExpensesHome from './components/expenses/expensesHome'
+import AddAccount from './components/balances/addAccount'
+
+
 function App() {
 
   return (
@@ -21,6 +25,9 @@ function App() {
         <Route path='/verified-redirect' element={<VerifiedRedirect />} /> 
         <Route path='/login' element={<LoginComponent />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/expenses-home' element={<ExpensesHome />} />
+        <Route path='/balance-home' element={<BalanceHome />} />
+        <Route path='/add-account' element={<AddAccount />} />
       </Routes>
     </Router>
     </>

@@ -2,12 +2,15 @@ import './addAccount.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { addAccount } from '../../redux/accountSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { usePostAccountApiMutation } from '../../redux/apis/accountApi';
 
 const AddAccount = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userId = useSelector((state: RootState) => state.user.uid);
 
   //use state
   const [accountName, setAccountName] = useState('');
@@ -15,15 +18,28 @@ const AddAccount = () => {
   const [startingBalance, setStartingBalance] = useState(0);
   const [typeOfAccount, setTypeOfAccount] = useState('');
 
+  //api rtk query calls
+  const [accountApi] = usePostAccountApiMutation();
+
   const handleSave = async () => {
     const account = {
         accountName: accountName,
         bankName: bankName,
         balance: startingBalance,
-        typeOfAccount: typeOfAccount
+        typeOfAccount: typeOfAccount,
+        userId: userId ?? '',
     }
 
+    // send the query to the backend to post the user data 
+    try {
+        const data = await accountApi(account).unwrap()
+        console.log('here is the succesful response from account postage', data)
+
+    } catch (error) {
+        console.error(error)
+    }
     dispatch(addAccount(account));
+
 
 
   }

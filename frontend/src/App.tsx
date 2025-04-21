@@ -11,10 +11,29 @@ import BalanceHome from './components/balances/balanceHome'
 import ExpensesHome from './components/expenses/expensesHome'
 import AddAccount from './components/balances/addAccount'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { auth } from './components/loginSection/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { setUser, clearUser } from './redux/userSlice'
 
 
 function App() {
 
+
+  const dispatch = useDispatch();
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(setUser({uid: user.uid, username: user.displayName ?? ''}))
+    } else {
+      dispatch(clearUser())
+    }
+  });
+  
+  return () => unsubscribe();
+
+}, [dispatch])
   return (
     <>
     <Router>

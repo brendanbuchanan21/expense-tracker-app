@@ -1,13 +1,15 @@
 import '../dashboardSection/dashboard.css'
-
+import './balanceHome.css'
+import AccountComponent from './individualAccount'
 
 const BalanceHome = () => {
 
-
+ 
     return (
         <>
         <div className='display-container'>
-        <p>Get Started By tracking your account balances</p>
+
+        <AccountComponent />
         </div>
         </>
     )

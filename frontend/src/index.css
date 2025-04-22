@@ -6,4 +6,5 @@ body {
 :root {
   --orange: #ff3503;
   --hover-orange: #e52f00;
+  --background-grey: hsl(0, 0%, 10%);
 }

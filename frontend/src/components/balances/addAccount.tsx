@@ -44,7 +44,7 @@ const AddAccount = () => {
         const data = await accountApi(account).unwrap()
         console.log('here is the succesful response from account postage', data)
         dispatch(addAccount(account));
-        navigate('/dashboard')
+        navigate('/dashboard', { state: { tab: 'Balances' } });
     } catch (error) {
         console.error(error);
     } finally {

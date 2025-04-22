@@ -1,0 +1,40 @@
+
+.display-container {
+    border: 2px solid red;
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+}
+
+.account-balance-header-div {
+    text-align: center;
+    background-color: var(--background-grey)
+}
+.filter-div {
+    min-height: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    padding-left: 1rem;
+    padding-top: .4rem;
+}
+.filter-div button {
+    border-radius: .8rem;
+    height: 95%;
+    border: none;
+}
+.filter-div button:hover {
+    background-color: white;
+}
+.add-transaction-div {
+    border: .5px solid hsl(0, 0%, 70%);
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+}
+.add-transaction-inner-div {
+    display: flex;
+    gap: .5rem;
+    padding-left: 1rem;
+    color: hsl(0, 0%, 70%);
+}

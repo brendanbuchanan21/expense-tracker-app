@@ -3,13 +3,18 @@ import { useState } from "react"
 import Navbar from './navbar';
 import BalanceHome from '../balances/balanceHome';
 import ExpensesHome from '../expenses/expensesHome';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Dashboard = () => {
 
-const [tabSelected, setTabSelected] = useState("Activity");
 
 const navigate = useNavigate();
+const location = useLocation();
+
+
+const initialTab = location.state?.tab || "Activity";
+const [tabSelected, setTabSelected] = useState(initialTab);
+
 
     return (
        <section className="home-section">

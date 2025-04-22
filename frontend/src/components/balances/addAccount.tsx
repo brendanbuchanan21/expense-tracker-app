@@ -34,11 +34,12 @@ const AddAccount = () => {
     try {
         const data = await accountApi(account).unwrap()
         console.log('here is the succesful response from account postage', data)
-
+        dispatch(addAccount(account));
+        navigate('/balance-home')
     } catch (error) {
         console.error(error)
     }
-    dispatch(addAccount(account));
+   
 
 
 

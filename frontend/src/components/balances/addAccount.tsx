@@ -17,11 +17,14 @@ const AddAccount = () => {
   const [bankName, setBankName] = useState('');
   const [startingBalance, setStartingBalance] = useState(0);
   const [typeOfAccount, setTypeOfAccount] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState(false)
 
   //api rtk query calls
   const [accountApi] = usePostAccountApiMutation();
 
   const handleSave = async () => {
+    setLoading(true);
     const account = {
         accountName: accountName,
         bankName: bankName,
@@ -29,15 +32,23 @@ const AddAccount = () => {
         typeOfAccount: typeOfAccount,
         userId: userId ?? '',
     }
-
+    // need to stop unfilled fields from getting posted
+    if (accountName.length === 0 || bankName.length === 0 || startingBalance === 0 || typeOfAccount.length === 0) {
+        setMessage(true)
+        setLoading(false)
+        return;
+    }
+    
     // send the query to the backend to post the user data 
     try {
         const data = await accountApi(account).unwrap()
         console.log('here is the succesful response from account postage', data)
         dispatch(addAccount(account));
-        navigate('/balance-home')
+        navigate('/dashboard')
     } catch (error) {
-        console.error(error)
+        console.error(error);
+    } finally {
+        setLoading(false);
     }
    
 
@@ -51,7 +62,7 @@ const AddAccount = () => {
             <div className='add-account-header-div'>
                 <button id='add-account-cancel-btn' onClick={() => navigate('/dashboard')}>Cancel</button>
                 <p>Add account</p>
-                <button id='add-account-save-btn' onClick={handleSave}>Save</button>
+                <button id='add-account-save-btn' onClick={handleSave} disabled={loading}>{loading ? 'Saving...' : 'Save'}</button>
             </div>
 
             <div className='account-name-div'>
@@ -75,6 +86,11 @@ const AddAccount = () => {
                 <option value="Loans">Loans</option>
             </select>
            </div>
+           {message && (
+            <div className="error-message">
+            <p>Please fill out all fields before saving your account.</p>
+          </div>
+           )}
         </div>
         </section>
     )

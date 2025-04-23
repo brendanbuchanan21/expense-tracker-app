@@ -1,0 +1,79 @@
+
+.account-balance-header-div {
+    text-align: center;
+    background-color: var(--background-grey)
+}
+.filter-div {
+    min-height: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    padding-left: 1rem;
+    padding-top: .4rem;
+}
+.filter-div button {
+    border-radius: .8rem;
+    height: 95%;
+    border: none;
+}
+.filter-div button:hover {
+    background-color: white;
+}
+.add-transaction-div {
+    border: .5px solid hsl(0, 0%, 70%);
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+}
+.add-transaction-inner-div {
+    display: flex;
+    gap: .5rem;
+    padding-left: 1rem;
+    color: hsl(0, 0%, 70%);
+}
+.transaction-section {
+    height: auto;
+    text-align: center;
+}
+.recent-activity-text {
+    margin-top: 2rem;
+    border: 2px solid blue;
+}
+
+.transaction-card {
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    border: .5px solid hsl(0, 0%, 70%);
+}
+
+.transaction-card div {
+    font-size: .9rem;   
+}
+.transaction-img-div {
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.transaction-text-div {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+}
+.date-text {
+    color: hsl(0, 0%, 70%);
+}
+
+.transaction-amount-div {
+    margin-left: auto ;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.transaction-amount-div p {
+    color: hsl(0, 0%, 70%);
+}

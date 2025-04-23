@@ -23,8 +23,14 @@ export const accountApi = createApi({
 
         })
     }),
+    getAllAccountsApi: builder.query({
+        query: () => ({
+            url: '/',
+            method: "GET",
+        })
+    })
 
   })
 });
 
-export const { usePostAccountApiMutation } = accountApi;
+export const { usePostAccountApiMutation, useGetAllAccountsApiQuery } = accountApi;

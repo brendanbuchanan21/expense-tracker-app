@@ -47,6 +47,11 @@
     display: flex;
     background-color: var(--background-grey);
 }
+.active-account-section-div {
+    border-bottom: none;
+    background-color: var(--background-grey);
+    display: flex;
+}
 .account-type-div {
     height: 3rem;
     display: flex;
@@ -54,9 +59,33 @@
     gap: .5rem;
     padding-left: .5rem;
     color: hsl(0, 0%, 40%);
+    cursor: pointer;
+}
+.arrow-rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
 }
 .money-div {
     margin-left: auto;
     padding-right: .5rem;
     color: hsl(0, 0%, 40%);
+}
+
+.individual-account-balance-page-div {
+    display: flex;
+}
+.individual-account-balance-page-description-div {
+    height: 3rem;
+    padding-left: 1.5rem;
+}
+.individual-account-balance-page-description-div p {
+    margin: .5rem;
+    font-size: .8rem;
+}
+.bank-name-text {
+    color: var(--text-grey);
+}
+.individual-account-money-div {
+    margin-left: auto;
+    padding-right: .5rem;
 }

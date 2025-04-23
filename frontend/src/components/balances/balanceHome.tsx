@@ -15,16 +15,18 @@ const BalanceHome = () => {
 
   const accountsInRedux = useSelector((state: RootState) => state.accounts.accounts)
   const [activeChecking, setActiveChecking] = useState(false);
+  const [noAccounts, setNoAccounts] = useState(false);
   const dispatch = useDispatch();
 
-  //rtk queries
-  const { data: fetchedAccounts, isLoading, isError } = useGetAllAccountsApiQuery(undefined, {
+
+   //rtk queries
+   const { data: fetchedAccounts, isLoading, isError } = useGetAllAccountsApiQuery(undefined, {
     skip: accountsInRedux.length > 0
   })
 
-  //useeffect
+
   useEffect(() => {
-    if (fetchedAccounts.length > 0) {
+    if (fetchedAccounts && fetchedAccounts.length > 0) {
         fetchedAccounts.forEach((account: Account) => {
             dispatch(addAccount(account))
         });
@@ -33,9 +35,20 @@ const BalanceHome = () => {
   }, [fetchedAccounts, dispatch])
   
  
+
     return (
         <>
         <div className='display-container'>
+            {accountsInRedux.length < 1 && (
+                <>
+                <p>No accounts tracked yet</p>
+                </>
+            )}
+            {noAccounts && (
+                <div>
+                    <p>No accounts tracked so far</p>
+                </div>
+            )}
         {isLoading && <p>Loading accounts...</p>}
         {isError && <p>Had trouble fetching your accounts. Try refreshing the page.</p>}
 

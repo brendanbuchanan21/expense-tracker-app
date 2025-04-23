@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-interface Account {
+export interface Account {
     userId: string;
     accountName: string;
     bankName: string;

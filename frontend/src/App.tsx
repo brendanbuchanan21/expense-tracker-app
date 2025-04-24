@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 import { auth } from './components/loginSection/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { setUser, clearUser } from './redux/userSlice'
+import ProtectedRoute from './components/protectedRoute'
 
 
 function App() {
@@ -39,14 +40,14 @@ useEffect(() => {
       <Routes>
         <Route path='/' element={<IntroComponent />}/>
         <Route path='/welcome' element={<SignUpComponent />} />
-        <Route path='/picture' element={<PictureComponent />} />
-        <Route path='/check-your-email' element={<CheckEmailComponent />} />
-        <Route path='/verified-redirect' element={<VerifiedRedirect />} /> 
+        <Route path='/picture' element={<ProtectedRoute><PictureComponent /> </ProtectedRoute>} />
+        <Route path='/check-your-email' element={<ProtectedRoute><CheckEmailComponent /></ProtectedRoute>} />
+        <Route path='/verified-redirect' element={<ProtectedRoute><VerifiedRedirect /></ProtectedRoute>} /> 
         <Route path='/login' element={<LoginComponent />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/expenses-home' element={<ExpensesHome />} />
-        <Route path='/balance-home' element={<BalanceHome />} />
-        <Route path='/add-account' element={<AddAccount />} />
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='/expenses-home' element={<ProtectedRoute><ExpensesHome /></ProtectedRoute>} />
+        <Route path='/balance-home' element={<ProtectedRoute><BalanceHome /></ProtectedRoute>} />
+        <Route path='/add-account' element={<ProtectedRoute><AddAccount /></ProtectedRoute>} />
       </Routes>
     </Router>
     </>

@@ -63,10 +63,18 @@ class AccountView(APIView):
         if not user:
             return Response({"Error": "unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
         
-        user_id = user.uid
-        firebase_user = FirebaseUser.objects.get(firebase_uid=user_id)
-        if not firebase_user:
+        try:
+            firebase_user = FirebaseUser.objects.get(firebase_uid=user.uid)
+        except FirebaseUser.DoesNotExist:
             return Response({"could not find user in database"}, status=status.HTTP_401_UNAUTHORIZED)
             
+
+        # serialize it with our accoutn serializer
+        serializer = AccountSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=firebase_user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else: 
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             
-        
+      

@@ -27,8 +27,8 @@ const userSlice = createSlice({
             state.username = null;
             state.profilePictureUrl = null;
         },
-        addProfilePicture: (state, action: PayloadAction<{profilePictureUrl: string}>) => {
-            state.profilePictureUrl = action.payload.profilePictureUrl;
+        addProfilePicture: (state, action: PayloadAction<string>) => {
+            state.profilePictureUrl = action.payload;
         }
 
     }

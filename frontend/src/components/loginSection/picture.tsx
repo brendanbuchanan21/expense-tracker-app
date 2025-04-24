@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import React from 'react'
 import { usePostUserProfilePictureMutation } from '../../redux/apis/userDataApi'
+import { addProfilePicture } from '../../redux/userSlice'
+import { useDispatch } from 'react-redux'
+
 
 const PictureComponent = () => {
 
@@ -11,6 +14,7 @@ const navigate = useNavigate();
 
 const [preview, setPreview] = useState<string | null>(null);
 const [image, setImage] = useState<File | null>(null);
+const dispatch = useDispatch();
 
 //rtk query
 const [postUserProfilePicture] = usePostUserProfilePictureMutation();
@@ -27,8 +31,26 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (file) {
       setImage(file);
       setPreview(URL.createObjectURL(file));
+      convertFileToBase64(file);
     }
 }
+
+
+const convertFileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        resolve(reader.result as string);
+      } else {
+        reject("Could not convert file.");
+      }
+    };
+    reader.onerror = () => reject("File reading error");
+    reader.readAsDataURL(file);
+  });
+};
+
 
 const handleSave = async () => {
   if (!image) return;

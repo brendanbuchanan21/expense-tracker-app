@@ -19,7 +19,6 @@ import { setUser, clearUser } from './redux/userSlice'
 
 function App() {
 
-
   const dispatch = useDispatch();
 
 useEffect(() => {

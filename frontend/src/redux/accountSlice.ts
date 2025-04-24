@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Account {
     userId: string;
+    id?: string;
     accountName: string;
     bankName: string;
     balance: Number;

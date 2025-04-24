@@ -10,5 +10,6 @@ class AccountSerializer(serializers.ModelSerializer):
     typeOfAccount = serializers.CharField(source='type_of_account')
     class Meta: 
         model = MoneyAccount
-        fields = ['accountName', 'bankName', 'balance', 'typeOfAccount']
+        fields = ['id','accountName', 'bankName', 'balance', 'typeOfAccount']
+        read_only_fields = ['id']
         

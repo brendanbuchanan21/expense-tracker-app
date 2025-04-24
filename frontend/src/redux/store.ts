@@ -3,11 +3,23 @@ import userReducer  from '../redux/userSlice';
 import { userDataApi } from './apis/userDataApi';
 import accountReducer from '../redux/accountSlice';
 import { accountApi } from './apis/accountApi';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
+
+
+
+const userPersistConfig = {
+    key: 'user',
+    storage,
+    whitelist: ['profilePictureUrl'],
+};
+
+const persistedUserReducer = persistReducer(userPersistConfig, userReducer)
 
 
 export const store = configureStore({
     reducer: {
-     user: userReducer,
+     user: persistedUserReducer,
      accounts: accountReducer,
      [userDataApi.reducerPath]: userDataApi.reducer,
      [accountApi.reducerPath]: accountApi.reducer,

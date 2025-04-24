@@ -39,76 +39,72 @@ const BalanceHome = () => {
     return (
         <>
         <div className='display-container'>
-            {accountsInRedux.length < 1 && (
+            {accountsInRedux.length < 1 ? (
                 <>
-                <p>No accounts tracked yet</p>
+                <p className='no-accounts-text'>No accounts tracked yet</p>
                 </>
-            )}
-            {noAccounts && (
-                <div>
-                    <p>No accounts tracked so far</p>
+            ) : (
+                <>
+                <div className='balance-header-main-div'>
+                <div className='header-img-div'>
+                <img src={brendan} alt="sex-panther"  className='profile-pic'/>
                 </div>
-            )}
-        {isLoading && <p>Loading accounts...</p>}
-        {isError && <p>Had trouble fetching your accounts. Try refreshing the page.</p>}
-
-        <div className='balance-header-main-div'>
-        <div className='header-img-div'>
-        <img src={brendan} alt="sex-panther"  className='profile-pic'/>
-        </div>
-
-        <div className='balance-header-money-div'>
-            <p id='all-text'>All</p>
-            <p>$190</p>
-        </div>
-        </div>
-
-
-        <div className='balance-account-section'>
-
-        <div className={activeChecking ? 'active-account-section-div' : 'account-section-div'} onClick={() => setActiveChecking(prev => !prev)}>
-            <div className='account-type-div'>
-                <IoIosArrowDown className={activeChecking ? 'arrow-rotate' : 'arrow'}/>
-                <p>Cash & Checking</p>
-            </div>
-            <div className='money-div'>
-                <p>$190.00</p>
-            </div>
-        </div>
-        {activeChecking && (
-                <div className='individual-account-balance-page-div'>
-                    <div className='individual-account-balance-page-description-div'>
-                        <p>Brendan's Checking Account</p>
-                        <p className='bank-name-text'>Wells Fargo</p>
+        
+                <div className='balance-header-money-div'>
+                    <p id='all-text'>All</p>
+                    <p>$190</p>
+                </div>
+                </div>
+        
+        
+                <div className='balance-account-section'>
+        
+                <div className={activeChecking ? 'active-account-section-div' : 'account-section-div'} onClick={() => setActiveChecking(prev => !prev)}>
+                    <div className='account-type-div'>
+                        <IoIosArrowDown className={activeChecking ? 'arrow-rotate' : 'arrow'}/>
+                        <p>Cash & Checking</p>
                     </div>
-                    <div className='individual-account-money-div'>
-                        <p>$190</p>
+                    <div className='money-div'>
+                        <p>$190.00</p>
                     </div>
                 </div>
+                {activeChecking && (
+                        <div className='individual-account-balance-page-div'>
+                            <div className='individual-account-balance-page-description-div'>
+                                <p>Brendan's Checking Account</p>
+                                <p className='bank-name-text'>Wells Fargo</p>
+                            </div>
+                            <div className='individual-account-money-div'>
+                                <p>$190</p>
+                            </div>
+                        </div>
+                    )}
+        
+                <div className='account-section-div'>
+                    <div className='account-type-div'>
+                        <IoIosArrowDown />
+                        <p>Savings</p>
+                    </div>
+                    <div className='money-div'>
+                        <p>$190.00</p>
+                    </div>
+                </div>
+        
+                <div className='account-section-div'>
+                    <div className='account-type-div'>
+                        <IoIosArrowDown />
+                        <p>Loans</p>
+                    </div>
+                    <div className='money-div'>
+                        <p>$190.00</p>
+                    </div>
+                </div>
+        
+                </div>
+                    </>
             )}
 
-        <div className='account-section-div'>
-            <div className='account-type-div'>
-                <IoIosArrowDown />
-                <p>Savings</p>
-            </div>
-            <div className='money-div'>
-                <p>$190.00</p>
-            </div>
-        </div>
-
-        <div className='account-section-div'>
-            <div className='account-type-div'>
-                <IoIosArrowDown />
-                <p>Loans</p>
-            </div>
-            <div className='money-div'>
-                <p>$190.00</p>
-            </div>
-        </div>
-
-        </div>
-
+       
 
 
 

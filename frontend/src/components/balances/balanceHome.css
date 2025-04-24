@@ -4,6 +4,9 @@
     min-height: 20rem;
     flex-direction: column;
 }
+.no-accounts-text {
+    text-align: center;
+}
 .balance-header-main-div {
     display: flex;
     position: relative;

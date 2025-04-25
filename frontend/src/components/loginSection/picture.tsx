@@ -26,12 +26,18 @@ const handleSkip = () => {
   navigate('/dashboard');
 }
 
-const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setImage(file);
-      setPreview(URL.createObjectURL(file));
-      convertFileToBase64(file);
+      setPreview(URL.createObjectURL(file)); 
+    try {
+      const base64 = await convertFileToBase64(file)
+      dispatch(addProfilePicture(base64))
+    } catch (err) {
+      console.error("base64 conversion failed", err);
+    }
+      
     }
 }
 
@@ -42,6 +48,7 @@ const convertFileToBase64 = (file: File): Promise<string> => {
     reader.onloadend = () => {
       if (reader.result) {
         resolve(reader.result as string);
+
       } else {
         reject("Could not convert file.");
       }

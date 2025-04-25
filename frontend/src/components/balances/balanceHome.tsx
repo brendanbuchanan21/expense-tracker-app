@@ -12,8 +12,11 @@ import { Account } from '../../redux/accountSlice'
 
 const BalanceHome = () => {
 
+  // redux state
+  const accountsInRedux = useSelector((state: RootState) => state.accounts.accounts);
+  const profilePicture = useSelector((state: RootState) => state.user.profilePictureUrl);
 
-  const accountsInRedux = useSelector((state: RootState) => state.accounts.accounts)
+  // use state
   const [activeChecking, setActiveChecking] = useState(false);
   const [noAccounts, setNoAccounts] = useState(false);
   const dispatch = useDispatch();
@@ -47,7 +50,7 @@ const BalanceHome = () => {
                 <>
                 <div className='balance-header-main-div'>
                 <div className='header-img-div'>
-                <img src={brendan} alt="sex-panther"  className='profile-pic'/>
+                <img src={profilePicture ?? ''} alt="sex-panther"  className='profile-pic'/>
                 </div>
         
                 <div className='balance-header-money-div'>

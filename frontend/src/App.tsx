@@ -42,7 +42,7 @@ useEffect(() => {
         <Route path='/welcome' element={<SignUpComponent />} />
         <Route path='/picture' element={<ProtectedRoute><PictureComponent /> </ProtectedRoute>} />
         <Route path='/check-your-email' element={<ProtectedRoute><CheckEmailComponent /></ProtectedRoute>} />
-        <Route path='/verified-redirect' element={<ProtectedRoute><VerifiedRedirect /></ProtectedRoute>} /> 
+        <Route path='/verified-redirect' element={<VerifiedRedirect />} /> 
         <Route path='/login' element={<LoginComponent />} />
         <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path='/expenses-home' element={<ProtectedRoute><ExpensesHome /></ProtectedRoute>} />

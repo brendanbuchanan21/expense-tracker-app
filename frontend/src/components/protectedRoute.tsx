@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { Navigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -9,9 +10,14 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
     const uid = useSelector((state: RootState) => state.user.uid)
+    const auth = getAuth();
+    const user = auth.currentUser;
 
-    if (!uid) {
-        return <Navigate to='/login' replace />
+    // If no uid in Redux, fallback to Firebase
+    const isAuthenticated = uid || (user && user.emailVerified);
+
+    if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
     }
 
     return <>{children}</>;

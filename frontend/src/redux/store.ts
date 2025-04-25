@@ -3,7 +3,7 @@ import userReducer  from '../redux/userSlice';
 import { userDataApi } from './apis/userDataApi';
 import accountReducer from '../redux/accountSlice';
 import { accountApi } from './apis/accountApi';
-import { persistReducer } from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
 
@@ -27,6 +27,8 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(userDataApi.middleware, accountApi.middleware), 
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

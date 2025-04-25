@@ -1,7 +1,6 @@
 import '../dashboardSection/dashboard.css'
 import './balanceHome.css'
-import { IoIosArrowDown } from 'react-icons/io'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useGetAllAccountsApiQuery } from '../../redux/apis/accountApi'
@@ -10,7 +9,7 @@ import { Account } from '../../redux/accountSlice'
 import { FaSpinner } from 'react-icons/fa'
 import CheckingComponent from './checkingTab'
 import SavingsComponent from './savingsTab'
-import LoansComponent from './loansTab'
+import LoansComponent from './loansTab.tsx'
 
 const BalanceHome = () => {
 
@@ -20,6 +19,10 @@ const BalanceHome = () => {
   
   // savings account info
   const accounts = useSelector((state: RootState) => state.accounts.accounts)
+  console.log(accounts, 'lol😆');
+  const totalmoney = accounts.reduce((accumulator, current) => {
+    return accumulator + Number(current.balance)
+  },0)
   
   const dispatch = useDispatch();
 
@@ -27,7 +30,6 @@ const BalanceHome = () => {
    const { data: fetchedAccounts, isLoading } = useGetAllAccountsApiQuery(undefined, {
     skip: accountsInRedux.length > 0
   })
-
 
   useEffect(() => {
     if (fetchedAccounts && fetchedAccounts.length > 0) {
@@ -58,30 +60,18 @@ const BalanceHome = () => {
         
                 <div className='balance-header-money-div'>
                     <p id='all-text'>All</p>
-                    <p>money</p>
+                    <p>{totalmoney}</p>
                 </div>
                 </div>
-        
-        
                 <div className='balance-account-section'>
                 <CheckingComponent />
                 <SavingsComponent />
                 <LoansComponent />
-        
-              
-        
                 </div>
-                    </>
+                </>
             )}
-
-       
-
-
-
         </div>
         </>
-    )
-
+            )
 }
-    
 export default BalanceHome;

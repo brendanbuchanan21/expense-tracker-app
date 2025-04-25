@@ -16,11 +16,14 @@ import { auth } from './components/loginSection/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { setUser, clearUser } from './redux/userSlice'
 import ProtectedRoute from './components/protectedRoute'
+import { useState } from 'react'
 
 
 function App() {
 
   const dispatch = useDispatch();
+  const [authChecked, setAuthChecked] = useState(false);
+
 
 useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -29,11 +32,17 @@ useEffect(() => {
     } else {
       dispatch(clearUser())
     }
+    setAuthChecked(true);
   });
   
   return () => unsubscribe();
 
 }, [dispatch])
+
+  if (!authChecked) {
+    return <div>Loading...</div>
+  }
+
   return (
     <>
     <Router>

@@ -44,6 +44,9 @@
     text-align: center;
     color: hsl(0, 0%, 40%);
 }
+.balance-account-section {
+    min-height: 20rem;
+}
 
 .account-section-div {
     border-bottom: .5px solid hsl(0, 0%, 40%);
@@ -76,6 +79,7 @@
 
 .individual-account-balance-page-div {
     display: flex;
+    border-bottom: .5px solid hsl(0, 0%, 40%);
 }
 .individual-account-balance-page-description-div {
     height: 3rem;
@@ -91,4 +95,8 @@
 .individual-account-money-div {
     margin-left: auto;
     padding-right: .5rem;
+}
+.account-no-activity-text {
+    padding-left: 1.5rem;
+    font-size: .8rem;
 }

@@ -6,7 +6,7 @@ export interface Account {
     id?: string;
     accountName: string;
     bankName: string;
-    balance: Number;
+    balance: number;
     typeOfAccount: string;
 }
 

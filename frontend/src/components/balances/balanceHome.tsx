@@ -1,6 +1,5 @@
 import '../dashboardSection/dashboard.css'
 import './balanceHome.css'
-import brendan from '../../images/Me.jpg'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,22 +7,24 @@ import { RootState } from '../../redux/store'
 import { useGetAllAccountsApiQuery } from '../../redux/apis/accountApi'
 import { addAccount } from '../../redux/accountSlice'
 import { Account } from '../../redux/accountSlice'
-
+import { FaSpinner } from 'react-icons/fa'
+import CheckingComponent from './checkingTab'
+import SavingsComponent from './savingsTab'
+import LoansComponent from './loansTab'
 
 const BalanceHome = () => {
 
   // redux state
   const accountsInRedux = useSelector((state: RootState) => state.accounts.accounts);
   const profilePicture = useSelector((state: RootState) => state.user.profilePictureUrl);
-
-  // use state
-  const [activeChecking, setActiveChecking] = useState(false);
-  const [noAccounts, setNoAccounts] = useState(false);
+  
+  // savings account info
+  const accounts = useSelector((state: RootState) => state.accounts.accounts)
+  
   const dispatch = useDispatch();
 
-
    //rtk queries
-   const { data: fetchedAccounts, isLoading, isError } = useGetAllAccountsApiQuery(undefined, {
+   const { data: fetchedAccounts, isLoading } = useGetAllAccountsApiQuery(undefined, {
     skip: accountsInRedux.length > 0
   })
 
@@ -34,14 +35,16 @@ const BalanceHome = () => {
             dispatch(addAccount(account))
         });
     }
-    
   }, [fetchedAccounts, dispatch])
   
- 
-
     return (
         <>
         <div className='display-container'>
+            {isLoading && (
+                <>
+                <FaSpinner />
+                </>
+            )}
             {accountsInRedux.length < 1 ? (
                 <>
                 <p className='no-accounts-text'>No accounts tracked yet</p>
@@ -55,53 +58,17 @@ const BalanceHome = () => {
         
                 <div className='balance-header-money-div'>
                     <p id='all-text'>All</p>
-                    <p>$190</p>
+                    <p>money</p>
                 </div>
                 </div>
         
         
                 <div className='balance-account-section'>
+                <CheckingComponent />
+                <SavingsComponent />
+                <LoansComponent />
         
-                <div className={activeChecking ? 'active-account-section-div' : 'account-section-div'} onClick={() => setActiveChecking(prev => !prev)}>
-                    <div className='account-type-div'>
-                        <IoIosArrowDown className={activeChecking ? 'arrow-rotate' : 'arrow'}/>
-                        <p>Cash & Checking</p>
-                    </div>
-                    <div className='money-div'>
-                        <p>$190.00</p>
-                    </div>
-                </div>
-                {activeChecking && (
-                        <div className='individual-account-balance-page-div'>
-                            <div className='individual-account-balance-page-description-div'>
-                                <p>Brendan's Checking Account</p>
-                                <p className='bank-name-text'>Wells Fargo</p>
-                            </div>
-                            <div className='individual-account-money-div'>
-                                <p>$190</p>
-                            </div>
-                        </div>
-                    )}
-        
-                <div className='account-section-div'>
-                    <div className='account-type-div'>
-                        <IoIosArrowDown />
-                        <p>Savings</p>
-                    </div>
-                    <div className='money-div'>
-                        <p>$190.00</p>
-                    </div>
-                </div>
-        
-                <div className='account-section-div'>
-                    <div className='account-type-div'>
-                        <IoIosArrowDown />
-                        <p>Loans</p>
-                    </div>
-                    <div className='money-div'>
-                        <p>$190.00</p>
-                    </div>
-                </div>
+              
         
                 </div>
                     </>

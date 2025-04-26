@@ -2,9 +2,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useState } from "react";
-
-
-
+import AccountComponent from "./individualAccount";
+import { Account } from "../../redux/accountSlice";
 
 const LoansComponent = () => {
 
@@ -19,7 +18,11 @@ const LoansComponent = () => {
   
      // use state
     const [activeLoans, setActiveLoans] = useState(false);
-
+    const [individualAccountPopUp, setIndividualAccountPopUp] = useState(false)
+    const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+    // onclick, set pop up true,
+    // conditionally render the pop up
+    // pass individual account data into the pop up, obviously 
 
     return (
         <>
@@ -34,8 +37,10 @@ const LoansComponent = () => {
                 </div>
                 {activeLoans && (
                     loanAccounts.length > 0 ? (
-                       loanAccounts.map((account, index) => (
-                        <div className='individual-account-balance-page-div' key={index}>
+                       loanAccounts.map((account) => (
+                        <div className='individual-account-balance-page-div' key={account.id} onClick={() => {
+                            setIndividualAccountPopUp(true); setSelectedAccount(account); 
+                            }}>
                         <div className='individual-account-balance-page-description-div'>
                             <p>{account.accountName}</p>
                             <p className='bank-name-text'>{account.bankName}</p>
@@ -50,7 +55,13 @@ const LoansComponent = () => {
                         <div className='individual-account-balance-page-div'><p className='account-no-activity-text'>No activity yet</p></div>
                         </>
                     )
-                )}        
+                )} 
+
+                {individualAccountPopUp && selectedAccount && (
+                    <AccountComponent onClose={() => setIndividualAccountPopUp(false)}
+                    account={selectedAccount}
+                    />
+                )}       
         </>
     )
 }

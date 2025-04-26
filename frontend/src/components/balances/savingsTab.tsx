@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { Account } from "../../redux/accountSlice";
+import AccountComponent from "./individualAccount";
 
 const SavingsComponent = () => {
 
@@ -16,7 +18,9 @@ const SavingsComponent = () => {
 
     //use state
     const [activeSavings, setActiveSavings] = useState(false)
-
+    const [individualAccountPopUp, setIndividualAccountPopUp] = useState(false)
+    const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+    
     return (
     <>
     <div className={activeSavings ? 'active-account-section-div' : 'account-section-div'} onClick={() => setActiveSavings(prev => !prev)}>
@@ -30,8 +34,11 @@ const SavingsComponent = () => {
     </div>
         
         {activeSavings && (
-            savingsAccounts.map((account, index) => (
-            <div className='individual-account-balance-page-div' key={index}>
+            savingsAccounts.map((account) => (
+            <div className='individual-account-balance-page-div' key={account.id} onClick={() => {
+                setIndividualAccountPopUp(true);
+                setSelectedAccount(account);
+            }}>
             <div className='individual-account-balance-page-description-div'>
             <p>{account.accountName}</p>
             <p className='bank-name-text'>{account.bankName}</p>
@@ -42,6 +49,12 @@ const SavingsComponent = () => {
             </div>
             ))
         )}
+
+                {individualAccountPopUp && selectedAccount && (
+                    <AccountComponent onClose={() => setIndividualAccountPopUp(false)}
+                    account={selectedAccount}
+                    />
+                )}    
     </>
     )
 }

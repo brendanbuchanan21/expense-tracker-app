@@ -1,15 +1,23 @@
 import addMarker from '../../images/greyAddMarker.svg'
 import { FaCoffee } from 'react-icons/fa';
 import './individualAccount.css'
+import React from 'react';
+import { Account } from '../../redux/accountSlice';
 
-const AccountComponent = () => {
+interface AccountComponentProps {
+    onClose: () => void;
+    account: Account;
+}
+
+const AccountComponent: React.FC<AccountComponentProps> = ({onClose, account}) => {
 
     //if no transactions, then display no recent activity
 
     return (
         <>
+        <button onClick={onClose}>Close</button>
         <div className="account-balance-header-div">
-        <h3>${200.00}</h3>
+        <h3>${account.balance}</h3>
         <p>Brendans checking account</p>
         </div>
 

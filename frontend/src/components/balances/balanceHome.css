@@ -80,6 +80,7 @@
 .individual-account-balance-page-div {
     display: flex;
     border-bottom: .5px solid hsl(0, 0%, 40%);
+    cursor: pointer;
 }
 .individual-account-balance-page-description-div {
     height: 3rem;
@@ -100,3 +101,6 @@
     padding-left: 1.5rem;
     font-size: .8rem;
 }
+
+
+  

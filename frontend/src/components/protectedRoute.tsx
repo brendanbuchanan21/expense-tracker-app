@@ -3,6 +3,7 @@ import { RootState } from "../redux/store";
 import { Navigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
+
 interface ProtectedRouteProps {
     children: React.ReactNode;
 }

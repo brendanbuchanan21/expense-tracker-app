@@ -25,7 +25,7 @@ function App() {
   const [authChecked, setAuthChecked] = useState(false);
 
 
-useEffect(() => {
+  useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
       dispatch(setUser({uid: user.uid, username: user.displayName ?? ''}))

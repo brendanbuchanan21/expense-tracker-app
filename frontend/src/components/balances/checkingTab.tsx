@@ -4,6 +4,7 @@ import { RootState } from "../../redux/store";
 import { useState } from "react";
 import AccountComponent from "./individualAccount";
 import { Account } from "../../redux/accountSlice";
+import { useNavigate } from "react-router-dom";
 
 const CheckingComponent = () => {
 
@@ -11,6 +12,7 @@ const CheckingComponent = () => {
   const [activeChecking, setActiveChecking] = useState(false)
   const [individualAccountPopUp, setIndividualAccountPopUp] = useState(false)
   const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+  const navigate = useNavigate();
 
     //checking account info
   const checkingAccounts = accounts.filter((account) => account.typeOfAccount === "Checking");
@@ -20,7 +22,9 @@ const CheckingComponent = () => {
 
   const formattedCheckingAccountTotal = checkingAmountTotal.toFixed(2);
   
-
+  const handleAccountClick = (account: Account) => {
+    navigate(`/individual-account/${account.id}`);
+  }
 
         return (
             <>
@@ -38,8 +42,7 @@ const CheckingComponent = () => {
                 {activeChecking && (
                 checkingAccounts.map((account) => (
                 <div className='individual-account-balance-page-div' key={account.id} onClick={() => {
-                    setIndividualAccountPopUp(true);
-                    setSelectedAccount(account);
+                   handleAccountClick(account)
                 }}>
                 <div className='individual-account-balance-page-description-div'>
                 <p>{account.accountName}</p>
@@ -50,13 +53,7 @@ const CheckingComponent = () => {
                 </div>
                 </div>
                 ))
-                )}
-
-                    {individualAccountPopUp && selectedAccount && (
-                    <AccountComponent onClose={() => setIndividualAccountPopUp(false)}
-                    account={selectedAccount}
-                    />
-                )}  
+                )} 
                 
             </>
         )

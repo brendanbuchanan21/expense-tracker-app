@@ -1,24 +1,33 @@
 import addMarker from '../../images/greyAddMarker.svg'
 import { FaCoffee } from 'react-icons/fa';
 import './individualAccount.css'
-import React from 'react';
-import { Account } from '../../redux/accountSlice';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
-interface AccountComponentProps {
-    onClose: () => void;
-    account: Account;
-}
 
-const AccountComponent: React.FC<AccountComponentProps> = ({onClose, account}) => {
+const AccountComponent = () => {
 
-    //if no transactions, then display no recent activity
+    const { id } = useParams<{ id: string }>();
+
+    if (!id) {
+        return <div>Account not found!</div>
+    }
+    const accountId = parseInt(id);
+    const account = useSelector((state: RootState) => state.accounts.accounts.find((account) => account.id === accountId));
+    console.log(account);
+    if (!account) {
+        return <div>Account not found!</div>
+    }
 
     return (
-        <>
-        <button onClick={onClose}>Close</button>
+        <section className='individual-account-section'>
+            <div className='main-container-individual-account'>
+
+            <button id='individual-account-close-btn'>Close</button>
         <div className="account-balance-header-div">
-        <h3>${account.balance}</h3>
-        <p>Brendans checking account</p>
+        <h3>{account.balance}</h3>
+        <p>{account.accountName}</p>
         </div>
 
         <div className="filter-div">
@@ -50,9 +59,13 @@ const AccountComponent: React.FC<AccountComponentProps> = ({onClose, account}) =
             <p>$10.00</p>
             </div>
             </div>
-          
         </div>
-        </>
+
+
+            </div>
+       
+
+        </section>
     )
 }
 

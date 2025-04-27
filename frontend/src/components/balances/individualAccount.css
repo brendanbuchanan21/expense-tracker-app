@@ -1,4 +1,20 @@
 
+.individual-account-section {
+    margin-top: 10rem;
+}
+
+.main-container-individual-account {
+    width: 25rem;
+    min-height: 25rem;
+    border: .5px solid hsl(0, 0%, 40%);
+    margin: 0 auto;
+
+}
+#individual-account-close-btn {
+    width: 4rem;
+    margin: .5rem 0 1rem .3rem;
+    border: none;
+}
 .account-balance-header-div {
     text-align: center;
     background-color: var(--background-grey)

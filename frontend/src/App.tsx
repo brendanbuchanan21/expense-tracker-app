@@ -17,7 +17,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { setUser, clearUser } from './redux/userSlice'
 import ProtectedRoute from './components/protectedRoute'
 import { useState } from 'react'
-
+import AccountComponent from './components/balances/individualAccount'
 
 function App() {
 
@@ -57,6 +57,7 @@ function App() {
         <Route path='/expenses-home' element={<ProtectedRoute><ExpensesHome /></ProtectedRoute>} />
         <Route path='/balance-home' element={<ProtectedRoute><BalanceHome /></ProtectedRoute>} />
         <Route path='/add-account' element={<ProtectedRoute><AddAccount /></ProtectedRoute>} />
+        <Route path='/individual-account/:id' element={<AccountComponent />} />
       </Routes>
     </Router>
     </>

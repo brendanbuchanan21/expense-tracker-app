@@ -3,6 +3,7 @@
     display: flex;
     min-height: 20rem;
     flex-direction: column;
+
 }
 .no-accounts-text {
     text-align: center;

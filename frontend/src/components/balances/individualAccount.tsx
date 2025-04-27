@@ -1,7 +1,7 @@
 import addMarker from '../../images/greyAddMarker.svg'
 import { FaCoffee } from 'react-icons/fa';
 import './individualAccount.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
@@ -20,11 +20,19 @@ const AccountComponent = () => {
         return <div>Account not found!</div>
     }
 
+    const navigate = useNavigate();
+
+    const closeAccount = () => {
+        navigate('/dashboard')
+    }
+
+
+
     return (
         <section className='individual-account-section'>
             <div className='main-container-individual-account'>
 
-            <button id='individual-account-close-btn'>Close</button>
+            <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>
         <div className="account-balance-header-div">
         <h3>{account.balance}</h3>
         <p>{account.accountName}</p>

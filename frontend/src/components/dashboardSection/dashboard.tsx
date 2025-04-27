@@ -3,18 +3,26 @@ import { useState } from "react"
 import Navbar from './navbar';
 import BalanceHome from '../balances/balanceHome';
 import ExpensesHome from '../expenses/expensesHome';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
 
-const navigate = useNavigate();
-const location = useLocation();
+  const navigate = useNavigate();
 
+//somehow i need to create a function that takes in the tab selected in navbar, and set the tab selected to the selected
+// tab, and then i need to set the initial tab value to be the seleceted tab from local storage or activity as
+// default
 
-const initialTab = location.state?.tab || "Activity";
-const [tabSelected, setTabSelected] = useState(initialTab);
+  const handleTabChange = (newTab: string) => {
+    setTabSelected(newTab)
+    localStorage.setItem('selectedTab', newTab)
+  }
 
+  const initialTab = localStorage.getItem('selectedTab') || 'Activity';
+  const [tabSelected, setTabSelected] = useState(initialTab);
+
+  
 
     return (
        <section className="home-section">
@@ -58,7 +66,7 @@ const [tabSelected, setTabSelected] = useState(initialTab);
             </>
         )}
         
-        <Navbar tabSelected={tabSelected} setTabSelected={setTabSelected}/>
+        <Navbar tabSelected={tabSelected} setTabSelected={handleTabChange}/>
 
         </div>
         

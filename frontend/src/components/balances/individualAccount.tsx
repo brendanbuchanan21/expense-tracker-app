@@ -4,6 +4,8 @@ import './individualAccount.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+import { useState } from 'react';
+import AddTransactionComponent from './addTransaction';
 
 
 const AccountComponent = () => {
@@ -26,13 +28,17 @@ const AccountComponent = () => {
         navigate('/dashboard')
     }
 
-
+    //use state
+    const [addTransaction, setAddTransaction] = useState(false);
 
     return (
         <section className='individual-account-section'>
             <div className='main-container-individual-account'>
-
-            <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>
+            {addTransaction ? (
+                <AddTransactionComponent onClose={() => setAddTransaction(false)} />
+            ) : (
+                <>
+                <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>
         <div className="account-balance-header-div">
         <h3>{account.balance}</h3>
         <p>{account.accountName}</p>
@@ -44,7 +50,7 @@ const AccountComponent = () => {
             <button>Sort</button>
         </div>
 
-        <div className="add-transaction-div">
+        <div className="add-transaction-div" onClick={() => setAddTransaction(true)}>
         <div className="add-transaction-inner-div">
         <img src={addMarker} alt="" />
         <p>Add a Transaction</p>
@@ -68,12 +74,13 @@ const AccountComponent = () => {
             </div>
             </div>
         </div>
-
-
+        </>
+            )}
             </div>
        
 
         </section>
+
     )
 }
 

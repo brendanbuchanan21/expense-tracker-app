@@ -2,7 +2,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useState } from "react";
-import AccountComponent from "./individualAccount";
 import { Account } from "../../redux/accountSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -10,8 +9,6 @@ const CheckingComponent = () => {
 
   const accounts = useSelector((state: RootState) => state.accounts.accounts);
   const [activeChecking, setActiveChecking] = useState(false)
-  const [individualAccountPopUp, setIndividualAccountPopUp] = useState(false)
-  const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
   const navigate = useNavigate();
 
     //checking account info

@@ -93,3 +93,74 @@
 .transaction-amount-div p {
     color: hsl(0, 0%, 70%);
 }
+
+
+.account-balance-add-header {
+    height: 3rem;
+    background-color: var(--background-grey);
+    display: flex;
+    justify-content: space-between;
+}
+.account-balance-add-header button {
+    height: 1.5rem;
+    background: none;
+    color: var(--orange);
+    border: none;
+    padding: 1rem;
+}
+.account-balance-add-header button:hover {
+    color: var(--hover-orange);
+}
+
+.add-transaction-description-container {
+    border: 2px solid orange;
+}
+.transaction-input {
+    box-sizing: border-box;
+    border-bottom: .5px solid hsl(0, 0%, 40%);
+    width: 100%;
+    height: 1.8rem;
+    background: none;
+    padding-left: .8rem;
+}
+.date-container {
+    border-bottom: .5px solid hsl(0, 0%, 40%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 .8rem;
+    align-items: center;
+    height: 1.8rem;
+}
+.transaction-date-input {
+    height: 1.3rem;
+}
+.amount-div {
+    border-bottom: .5px solid hsl(0, 0%, 40%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.8rem;
+}
+#type-of-transaction-select {
+    width: 50%;
+    border: none;
+    border-right: .5px solid hsl(0, 0%, 40%);
+    height: 100%;
+    box-sizing: border-box;
+    padding-left: .4rem;
+    background: none;
+    color: white;
+}
+.transaction-amount-input {
+    border: none;
+    border-right: .5px solid hsl(0, 0%, 40%);
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    background: none;
+    padding-left: .5rem;
+}
+.transaction-space-div {
+    height: 1.8rem;
+    background-color: var(--background-grey);
+}

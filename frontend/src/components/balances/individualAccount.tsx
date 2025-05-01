@@ -1,11 +1,11 @@
 import addMarker from '../../images/greyAddMarker.svg'
-import { FaCoffee } from 'react-icons/fa';
 import './individualAccount.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useState } from 'react';
 import AddTransactionComponent from './addTransaction';
+import TransactionCard from './transactionCard';
 
 
 const AccountComponent = () => {
@@ -58,21 +58,8 @@ const AccountComponent = () => {
         </div>
 
         <div className='transaction-section'>
-
-            <div className='transaction-card'>
-            <div className='transaction-img-div'>
-            <FaCoffee />
-            </div>
-
-            <div className='transaction-text-div'>
-            <p>coffee date</p>
-            <p className='date-text'>4/22</p>
-           </div>
-
-            <div className='transaction-amount-div'>
-            <p>$10.00</p>
-            </div>
-            </div>
+            <TransactionCard account={account}/>
+           
         </div>
         </>
             )}

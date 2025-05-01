@@ -4,6 +4,7 @@ import { useState } from "react";
 import CategoryComponent from "./categoryItem";
 import { addTransaction } from "../../redux/accountSlice";
 import { useDispatch } from "react-redux";
+import { useAddTransactionApiMutation } from "../../redux/apis/accountApi";
 
 interface AddTransactionComponentProps {
     onClose: () => void;
@@ -21,18 +22,27 @@ const AddTransactionComponent: React.FC<AddTransactionComponentProps> = ({ onClo
   const [category, setCategory] = useState<string>("");
   const [error, setError] = useState(false);
 
+  //api calls
+  const [addTransactionApi] = useAddTransactionApiMutation();
+
+
   const transaction = {
     description,
     date,
     type,
     amount,
-    category
+    category,
+    account: accountId,
   }
 
 const handleAddTransaction = async () => {
   
-if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount !== 0 && category.length !== 0) {
-  dispatch(addTransaction({accountId, transaction}))
+if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount !== 0 && category.length !== 0 && !accountId) {
+
+  // ill need to send to server and respond with an ID 
+  const data = await addTransactionApi({transaction}).unwrap();
+  console.log('response for adding a transaction in backend', data);
+  
   
 } else {
   setError(true)

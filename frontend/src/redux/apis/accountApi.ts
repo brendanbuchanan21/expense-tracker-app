@@ -28,7 +28,7 @@ export const accountApi = createApi({
             url: '/',
             method: "GET",
         })
-    })
+    }),
 
   })
 });

@@ -2,37 +2,68 @@ import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
 import CategoryComponent from "./categoryItem";
+import { addTransaction } from "../../redux/accountSlice";
+import { useDispatch } from "react-redux";
 
 interface AddTransactionComponentProps {
     onClose: () => void;
+    accountId: number;
 }
 
-const AddTransactionComponent: React.FC<AddTransactionComponentProps> = ({ onClose}) => {
+const AddTransactionComponent: React.FC<AddTransactionComponentProps> = ({ onClose, accountId }) => {
 
+  const dispatch = useDispatch();
   const [categoryActive, setCategoryActive] = useState(false);
+  const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [type, setType] = useState<string>("Deposit");
+  const [amount, setAmount] = useState<number>(0);
+  const [category, setCategory] = useState<string>("");
+  const [error, setError] = useState(false);
 
+  const transaction = {
+    description,
+    date,
+    type,
+    amount,
+    category
+  }
+
+const handleAddTransaction = async () => {
+  
+if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount !== 0 && category.length !== 0) {
+  dispatch(addTransaction({accountId, transaction}))
+  
+} else {
+  setError(true)
+}
+
+}
 
   return (
     <div className="add-transaction-balance-container">
         <div className='account-balance-add-header'>
         <button onClick={onClose}>Cancel</button>
         <p>Add Transaction</p>
-        <button>Save</button>
+        <button onClick={handleAddTransaction}>Save</button>
         </div>
 
         <div className="add-transaction-description-container">
-          <input type="text" placeholder="Description" className="transaction-input"/> 
+          <input type="text" placeholder="Description" className="transaction-input" onChange={(e) => setDescription(e.target.value)}/> 
           <div className="date-container">
             <p>Date</p>
-            <input type="date" className="transaction-date-input"/>
+            <input type="date" className="transaction-date-input" onChange={(e) => setDate(e.target.value)}/>
           </div>
 
           <div className="amount-div">
-            <select name="" id="type-of-transaction-select" defaultValue="Deposit">
+            <select name="" id="type-of-transaction-select" defaultValue="Deposit" onChange={(e) => setType(e.target.value)} value={type}>
                 <option value="Deposit">Deposit</option>
-                <option value="Withdrawal">WithDrawal</option>
+                <option value="Withdrawal">Withdrawal</option>
             </select>
-            <input type="text" placeholder="Amount" className="transaction-amount-input"/>
+            <input type="number" placeholder="Amount" className="transaction-amount-input" onChange={(e) => {
+              const value = e.target.value;
+              setAmount(parseFloat(value));
+            }}/>
           </div>
 
           <div className="transaction-space-div"></div>
@@ -46,7 +77,13 @@ const AddTransactionComponent: React.FC<AddTransactionComponentProps> = ({ onClo
         {categoryActive && (
 
           <div className={categoryActive ? "category-slide-container open" : "category-slide-container closed"}>
-          <CategoryComponent />
+          <CategoryComponent setCategory={setCategory}/>
+          </div>
+        )}
+
+        {error && (
+          <div className="error-div-transaction">
+            <p>Fill out all fields before saving</p>
           </div>
         )}
         

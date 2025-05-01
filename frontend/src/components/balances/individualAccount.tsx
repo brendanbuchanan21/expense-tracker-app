@@ -35,12 +35,12 @@ const AccountComponent = () => {
         <section className='individual-account-section'>
             <div className='main-container-individual-account'>
             {addTransaction ? (
-                <AddTransactionComponent onClose={() => setAddTransaction(false)} />
+                <AddTransactionComponent onClose={() => setAddTransaction(false)} accountId={accountId}/>
             ) : (
                 <>
                 <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>
         <div className="account-balance-header-div">
-        <h3>{account.balance}</h3>
+        <h3>0.00</h3>
         <p>{account.accountName}</p>
         </div>
 

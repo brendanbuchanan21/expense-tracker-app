@@ -41,11 +41,16 @@ const accountSlice = createSlice({
             const { accountId, transaction } = action.payload;
 
             const account = state.accounts.find((account) => account.id === accountId);
+            console.log('accountId', accountId);
+            console.log("Matched account:", JSON.stringify(account, null, 2));
+
             if (account) {
-                account.transactions?.push(transaction);
-                account.balance += transaction.type === "Depost" ? transaction.amount: -transaction.amount
-            } 
-           
+                if (!account.transactions) {
+                    account.transactions = [];
+                }
+                account.transactions.push(transaction);
+                account.balance += transaction.type === "Deposit" ? transaction.amount : -transaction.amount;
+            }
 
         }
     }
@@ -53,5 +58,5 @@ const accountSlice = createSlice({
 
 export default accountSlice.reducer;
 
-export const { addAccount } = accountSlice.actions;
+export const { addAccount, addTransaction } = accountSlice.actions;
 

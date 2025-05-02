@@ -40,9 +40,10 @@ const AccountComponent = () => {
                 <>
                 <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>
         <div className="account-balance-header-div">
-        <h3>0.00</h3>
+        <h3>{account.balance}</h3>
         <p>{account.accountName}</p>
         </div>
+
 
         <div className="filter-div">
             <button>Last 30 Days</button>
@@ -58,7 +59,7 @@ const AccountComponent = () => {
         </div>
 
         <div className='transaction-section'>
-            <TransactionCard account={account}/>
+            <TransactionCard account={account} />
            
         </div>
         </>

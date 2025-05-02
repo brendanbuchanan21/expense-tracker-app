@@ -42,7 +42,7 @@ if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount
   // ill need to send to server and respond with an ID 
   const data = await addTransactionApi({transaction}).unwrap();
   console.log('response for adding a transaction in backend', data);
-  dispatch(addTransaction(data));
+  dispatch(addTransaction({transaction: data, accountId: accountId}));
   onClose();
   
 } else {

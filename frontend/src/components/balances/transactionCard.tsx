@@ -1,6 +1,7 @@
 import { FaCoffee } from "react-icons/fa"
 import { Account } from "../../redux/accountSlice"
 import React from "react"
+import './individualAccount.css'
 
 
 interface TransactionCardProps {
@@ -13,21 +14,23 @@ const TransactionCard: React.FC<TransactionCardProps> = ({account}) => {
 
     return (
         <>
-     
-          <div className='transaction-card'>
-          <div className='transaction-img-div'>
-          <FaCoffee />
-          </div>
-  
-          <div className='transaction-text-div'>
-          <p>coffee date</p>
-          <p className='date-text'>4/22</p>
-         </div>
-  
-          <div className='transaction-amount-div'>
-          <p>$10.00</p>
-          </div>
-          </div>
+        {transactions?.map((transaction) => (
+            <div className='transaction-card' key={transaction.id}>
+            <div className='transaction-img-div'>
+            <FaCoffee  className="icon"/>
+            </div>
+    
+            <div className='transaction-text-div'>
+            <p>{transaction.description}</p>
+            <p className='date-text'>{transaction.date}</p>
+           </div>
+    
+            <div className='transaction-amount-div'>
+            <p>{transaction.amount}</p>
+            </div>
+            </div>
+        ))}
+        
         
         </>
     )

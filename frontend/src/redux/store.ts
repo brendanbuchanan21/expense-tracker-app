@@ -5,6 +5,7 @@ import accountReducer from '../redux/accountSlice';
 import { accountApi } from './apis/accountApi';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
+import { transactionApi } from './apis/transactionsApi';
 
 
 
@@ -23,9 +24,10 @@ export const store = configureStore({
      accounts: accountReducer,
      [userDataApi.reducerPath]: userDataApi.reducer,
      [accountApi.reducerPath]: accountApi.reducer,
+     [transactionApi.reducerPath]: transactionApi.reducer,
     },
     middleware: (getDefaultMiddleware) => 
-        getDefaultMiddleware().concat(userDataApi.middleware, accountApi.middleware), 
+        getDefaultMiddleware().concat(userDataApi.middleware, accountApi.middleware, transactionApi.middleware), 
 });
 
 export const persistor = persistStore(store);

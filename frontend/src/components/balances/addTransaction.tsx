@@ -2,9 +2,8 @@ import React from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
 import CategoryComponent from "./categoryItem";
-import { addTransaction } from "../../redux/accountSlice";
 import { useDispatch } from "react-redux";
-import { useAddTransactionApiMutation } from "../../redux/apis/accountApi";
+import { useAddTransactionApiMutation } from "../../redux/apis/transactionsApi";
 
 interface AddTransactionComponentProps {
     onClose: () => void;
@@ -37,7 +36,7 @@ const AddTransactionComponent: React.FC<AddTransactionComponentProps> = ({ onClo
 
 const handleAddTransaction = async () => {
   
-if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount !== 0 && category.length !== 0 && !accountId) {
+if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount !== 0 && category.length !== 0 && accountId) {
 
   // ill need to send to server and respond with an ID 
   const data = await addTransactionApi({transaction}).unwrap();

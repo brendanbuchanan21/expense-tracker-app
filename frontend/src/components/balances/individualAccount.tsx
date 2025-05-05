@@ -6,7 +6,8 @@ import { RootState } from '../../redux/store';
 import { useState } from 'react';
 import AddTransactionComponent from './addTransaction';
 import TransactionCard from './transactionCard';
-
+import { useGetAllTransactionsQuery } from '../../redux/apis/transactionsApi';
+import { useDispatch } from 'react-redux';
 
 const AccountComponent = () => {
 
@@ -23,6 +24,13 @@ const AccountComponent = () => {
     }
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
+    const { data, error } = useGetAllTransactionsQuery(id)
+    console.log(data, 'here is the transaction response');
+
+
 
     const closeAccount = () => {
         navigate('/dashboard')
@@ -59,7 +67,7 @@ const AccountComponent = () => {
         </div>
 
         <div className='transaction-section'>
-            <TransactionCard account={account} />
+            <TransactionCard transactions={data || []} />
            
         </div>
         </>

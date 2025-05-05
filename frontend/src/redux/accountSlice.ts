@@ -50,7 +50,9 @@ const accountSlice = createSlice({
                     account.transactions = [];
                 }
                 account.transactions.push(transaction);
-                account.balance += transaction.type === "Deposit" ? transaction.amount : -transaction.amount;
+                const amount = Number(transaction.amount);
+                account.balance = Number(account.balance) + (transaction.type === "Deposit" ? amount : -amount);
+                //account balance = account balance = 
             }
 
         }

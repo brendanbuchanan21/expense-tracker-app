@@ -10,6 +10,8 @@ const SavingsComponent = () => {
 
     const accounts = useSelector((state: RootState) => state.accounts.accounts)
     const savingsAccounts = accounts.filter((account) => account.typeOfAccount === "Savings");
+    //only equates to one savings account
+    console.log('🌻', savingsAccounts)
     const savingsAccountsTotal = savingsAccounts.reduce((accumulator, current) => {
       return accumulator + Number(current.balance);
     }, 0);

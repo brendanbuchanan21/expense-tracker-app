@@ -1,16 +1,15 @@
 import { FaCoffee } from "react-icons/fa"
-import { Account } from "../../redux/accountSlice"
 import React from "react"
 import './individualAccount.css'
+import { Transaction } from "../../redux/accountSlice"
 
 
 interface TransactionCardProps {
-    account: Account
+    transactions: Transaction[];
 }
 
-const TransactionCard: React.FC<TransactionCardProps> = ({account}) => {
+const TransactionCard: React.FC<TransactionCardProps> = ({ transactions }) => {
 
-  const transactions = account.transactions;
 
     return (
         <>
@@ -26,7 +25,7 @@ const TransactionCard: React.FC<TransactionCardProps> = ({account}) => {
            </div>
     
             <div className='transaction-amount-div'>
-            <p>{transaction.amount}</p>
+            <p className="transaction-amount">{transaction.type === "Deposit" ? `+${transaction.amount}` : `-${transaction.amount}`}</p>
             </div>
             </div>
         ))}

@@ -20,8 +20,14 @@ export const transactionApi = createApi({
                     method: "POST",
                     body: transaction
                 })
+            }),
+            getAllTransactions: builder.query({
+                query: (accountId) => ({
+                    url: `/${accountId}/`,
+                    method: "GET",
+                })
             })
         })
 })
 
-export const { useAddTransactionApiMutation } = transactionApi;
+export const { useAddTransactionApiMutation, useGetAllTransactionsQuery } = transactionApi;

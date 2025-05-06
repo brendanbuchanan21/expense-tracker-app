@@ -5,10 +5,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css'
 import { useState } from 'react';
+import { useGetLastThirtyTransactionsApiQuery } from '../../redux/apis/transactionsApi';
+
 
 const ExpensesHome = () => {
 
-  const data = [{description: 'cocacola', date: '05-06-2025', type: 'Withdrawal', amount: 4.00, category: 'miscellaneous', id: '1'}];
+  // const data = [{description: 'cocacola', date: '05-06-2025', type: 'Withdrawal', amount: 4.00, category: 'miscellaneous', id: '1'}];
+
+  
+  // default last 30 days of transactions for spending
+  const { data, isError, isLoading } = useGetLastThirtyTransactionsApiQuery();
 
   const [activeTab, setActiveTab] = useState('Spending');
 

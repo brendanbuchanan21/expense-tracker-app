@@ -26,8 +26,14 @@ export const transactionApi = createApi({
                     url: `/${accountId}/`,
                     method: "GET",
                 })
+            }),
+            getLastThirtyTransactionsApi: builder.query({
+                query: () => ({
+                    url: '/last-thirty',
+                    method: "GET",
+                })
             })
         })
 })
 
-export const { useAddTransactionApiMutation, useGetAllTransactionsQuery } = transactionApi;
+export const { useAddTransactionApiMutation, useGetAllTransactionsQuery, useGetLastThirtyTransactionsApiQuery } = transactionApi;

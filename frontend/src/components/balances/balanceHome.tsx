@@ -41,10 +41,10 @@ const BalanceHome = () => {
   
     return (
         <>
-        <div className='display-container'>
+        <div className={isLoading ? 'display-container-loading' : 'display-container'}>
             {isLoading && (
                 <>
-                <FaSpinner />
+                <FaSpinner className='balance-home-spinner'/>
                 </>
             )}
             {accountsInRedux.length < 1 ? (

@@ -8,7 +8,7 @@
     margin-top: .5rem;
     gap: 2px;
 }
-.nav-header-container div {
+.nonActiveTab {
     border-radius: .3rem;
     width: 30%;
     height: 1.5rem;
@@ -17,7 +17,22 @@
     align-items: center;
     background-color: hsl(0, 0%, 20%);
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
+.activeTab {
+    border-radius: .3rem;
+    width: 30%;
+    height: 1.5rem;
+    padding-left: .5rem;
+    color: hsl(0, 0%, 90%);
+    align-items: center;
+    background-color: var(--hover-orange);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
 .graph-section {
     padding: 0 .5rem;
     position: relative;

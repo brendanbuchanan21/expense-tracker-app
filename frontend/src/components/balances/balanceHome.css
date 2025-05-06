@@ -5,6 +5,21 @@
     flex-direction: column;
 
 }
+.display-container-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.balance-home-spinner {
+    text-align: center;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
 .no-accounts-text {
     text-align: center;
 }

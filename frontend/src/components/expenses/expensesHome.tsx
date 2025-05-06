@@ -16,8 +16,8 @@ const ExpensesHome = () => {
       <div className='display-container'>
 
       <div className='nav-header-container'>
-        <div onClick={() => setActiveTab("Spending")}>Spending</div>
-        <div className='earnings-div' onClick={() => setActiveTab("Earnings")}>Earnings</div>
+        <div onClick={() => setActiveTab("Spending")} className={activeTab === "Spending" ? 'activeTab' : 'nonActiveTab'}>Spending</div>
+        <div className={activeTab === "Earnings" ? 'activeTab' : 'nonActiveTab'} onClick={() => setActiveTab("Earnings")}>Earnings</div>
       </div>
 
       <div className='graph-section'>

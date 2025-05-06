@@ -7,6 +7,7 @@ import { useState } from 'react';
 import AddTransactionComponent from './addTransaction';
 import TransactionCard from './transactionCard';
 import { useGetAllTransactionsQuery } from '../../redux/apis/transactionsApi';
+import { ImSpinner6 } from 'react-icons/im';
 
 const AccountComponent = () => {
 
@@ -24,7 +25,7 @@ const AccountComponent = () => {
 
     const navigate = useNavigate();
 
-    const { data, error, refetch } = useGetAllTransactionsQuery(id)
+    const { data, error, refetch, isLoading } = useGetAllTransactionsQuery(id)
     console.log(data, 'here is the transaction response');
 
 
@@ -69,6 +70,11 @@ const AccountComponent = () => {
         </div>
 
         <div className='transaction-section'>
+            {isLoading && (
+                <div>
+                    <ImSpinner6 className='transaction-spinner'/>
+                </div>
+            )}
             <TransactionCard transactions={data || []} />
            
         </div>

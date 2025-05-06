@@ -14,7 +14,6 @@ class TransactionView(APIView):
     def post(self, request):
         
         
-        user = request.user
         transaction_data = request.data.get('transaction', {})
         account_id = transaction_data.get('account')
 
@@ -35,13 +34,21 @@ class TransactionView(APIView):
         except MoneyAccount.DoesNotExist: 
             return Response({"error": "Account not found"}, status=status.HTTP_404_NOT_FOUND)
         
+        # we need to update the individual accounts total balance 
+        # take the request amount and add or subtract from that specific money account
+        #total balance
         serializer = TransactionSerializer(data=transaction_data)
         if serializer.is_valid():
-            serializer.save(account=account)
-            #in this response we need to attach the new id
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+           transaction = serializer.save(account=account)
+
+           if transaction.type == "Deposit":
+               account.balance += transaction.amount
+           elif transaction.type == "Withdrawal":
+               account.balance -= transaction.amount
+           account.save()
+           
+           return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({"invalid data sent"}, status=status.HTTP_400_BAD_REQUEST)
     
     def get(self, request, account_id=None):
         if not account_id:

@@ -7,7 +7,6 @@ import { useState } from 'react';
 import AddTransactionComponent from './addTransaction';
 import TransactionCard from './transactionCard';
 import { useGetAllTransactionsQuery } from '../../redux/apis/transactionsApi';
-import { useDispatch } from 'react-redux';
 
 const AccountComponent = () => {
 
@@ -24,10 +23,8 @@ const AccountComponent = () => {
     }
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
-    const [loading, setLoading] = useState(false);
-    const { data, error } = useGetAllTransactionsQuery(id)
+    const { data, error, refetch } = useGetAllTransactionsQuery(id)
     console.log(data, 'here is the transaction response');
 
 
@@ -43,7 +40,12 @@ const AccountComponent = () => {
         <section className='individual-account-section'>
             <div className='main-container-individual-account'>
             {addTransaction ? (
-                <AddTransactionComponent onClose={() => setAddTransaction(false)} accountId={accountId}/>
+                <AddTransactionComponent onClose={(didAddTransaction) => {
+                    setAddTransaction(false)
+                    if (didAddTransaction) {
+                        refetch()
+                    }
+                }} accountId={accountId}/>
             ) : (
                 <>
                 <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>

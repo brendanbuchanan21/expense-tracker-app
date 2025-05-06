@@ -7,7 +7,7 @@ import { useAddTransactionApiMutation } from "../../redux/apis/transactionsApi";
 import { addTransaction } from "../../redux/accountSlice";
 
 interface AddTransactionComponentProps {
-    onClose: () => void;
+    onClose: (didAddTransaction: boolean) => void;
     accountId: number;
 }
 
@@ -43,7 +43,7 @@ if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount
   const data = await addTransactionApi({transaction}).unwrap();
   console.log('response for adding a transaction in backend', data);
   dispatch(addTransaction({transaction: data, accountId: accountId}));
-  onClose();
+  onClose(true);
   
 } else {
   setError(true)
@@ -54,7 +54,7 @@ if (description.length !== 0 && date.length !== 0 && type.length !== 0 && amount
   return (
     <div className="add-transaction-balance-container">
         <div className='account-balance-add-header'>
-        <button onClick={onClose}>Cancel</button>
+        <button onClick={() => onClose(false)}>Cancel</button>
         <p>Add Transaction</p>
         <button onClick={handleAddTransaction}>Save</button>
         </div>

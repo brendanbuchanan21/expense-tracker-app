@@ -6,6 +6,7 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css'
 import { useState } from 'react';
 import { useGetLastThirtyTransactionsApiQuery } from '../../redux/apis/transactionsApi';
+import { ImSpinner } from 'react-icons/im';
 
 
 const ExpensesHome = () => {
@@ -14,13 +15,12 @@ const ExpensesHome = () => {
 
   
   // default last 30 days of transactions for spending
-  const { data, isError, isLoading } = useGetLastThirtyTransactionsApiQuery();
+  const { data, isLoading } = useGetLastThirtyTransactionsApiQuery(undefined);
 
   const [activeTab, setActiveTab] = useState('Spending');
 
     return (
       <div className='display-container'>
-
       <div className='nav-header-container'>
         <div onClick={() => setActiveTab("Spending")} className={activeTab === "Spending" ? 'activeTab' : 'nonActiveTab'}>Spending</div>
         <div className={activeTab === "Earnings" ? 'activeTab' : 'nonActiveTab'} onClick={() => setActiveTab("Earnings")}>Earnings</div>
@@ -35,6 +35,9 @@ const ExpensesHome = () => {
         >
           <SwiperSlide>
             <div id='graph'>
+              {isLoading && (
+                <ImSpinner className='swiper-spinner'/>
+              )}
               <p>You Spent</p>
               <p>$0.00</p>
               <p>Last 30 days</p>

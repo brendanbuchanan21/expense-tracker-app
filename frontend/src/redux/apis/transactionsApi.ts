@@ -29,7 +29,7 @@ export const transactionApi = createApi({
             }),
             getLastThirtyTransactionsApi: builder.query({
                 query: () => ({
-                    url: '/last-thirty',
+                    url: '/last-thirty/',
                     method: "GET",
                 })
             })

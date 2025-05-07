@@ -16,7 +16,9 @@ const ExpensesHome = () => {
   
   // default last 30 days of transactions for spending
   const { data, isLoading } = useGetLastThirtyTransactionsApiQuery(undefined);
-
+  console.log('🌎', data);
+  const spendings = data?.spendings || [];
+  const earnings = data?.earnings || [];
   const [activeTab, setActiveTab] = useState('Spending');
 
     return (
@@ -70,7 +72,7 @@ const ExpensesHome = () => {
         </div>
 
         <div className='transactions-cards-container'>
-          <TransactionCard transactions={data || []}/>
+          <TransactionCard transactions={activeTab === 'Spending' ? spendings : earnings} activeTab={activeTab}/>
         </div>
       </div>
 

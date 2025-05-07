@@ -7,7 +7,7 @@ import 'swiper/swiper-bundle.css'
 import { useState } from 'react';
 import { useGetLastThirtyTransactionsApiQuery } from '../../redux/apis/transactionsApi';
 import { ImSpinner } from 'react-icons/im';
-
+import SpendingLineChart from './chartComponent';
 
 const ExpensesHome = () => {
 
@@ -20,6 +20,19 @@ const ExpensesHome = () => {
   const spendings = data?.spendings || [];
   const earnings = data?.earnings || [];
   const [activeTab, setActiveTab] = useState('Spending');
+
+  const spendingsThirtyDayTotal = spendings.reduce((acc: number, transaction: any) => {
+    return acc + parseFloat(transaction.amount);
+  }, 0);
+  console.log(spendingsThirtyDayTotal, 'here is the total amount for spendings')
+
+  const earningsThirtyDayTotal = earnings.reduce((acc: number, transaction: any) => {
+    return acc + parseFloat(transaction.amount)
+  }, 0)
+  console.log(earningsThirtyDayTotal, 'total earnings');
+
+
+
 
     return (
       <div className='display-container'>
@@ -37,20 +50,35 @@ const ExpensesHome = () => {
         >
           <SwiperSlide>
             <div id='graph'>
-              {isLoading && (
+              {isLoading ? (
                 <ImSpinner className='swiper-spinner'/>
+              ) : (
+                <>
+                {activeTab === 'Spending' ? (
+                  <>
+                  <p>You Spent</p>
+                  <p>${spendingsThirtyDayTotal.toFixed(2)}</p>
+                  <p>Last 30 days</p>
+                  </>
+                ) : (
+                  <>
+                  <p>You Earned</p>
+                  <p>${earningsThirtyDayTotal.toFixed(2)}</p>
+                  <p>Last 30 days</p>
+                  </>
+                )}
+              </>
               )}
-              <p>You Spent</p>
-              <p>$0.00</p>
-              <p>Last 30 days</p>
+              
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
             <div id='graph'>
-              <p>Earned</p>
-              <p>$500.00</p>
-              <p>Last 30 days</p>
+              <SpendingLineChart data={spendings.map((s: any) => ({
+        date: s.date,
+        amount: parseFloat(s.amount),
+      }))}/>
             </div>
           </SwiperSlide>
 

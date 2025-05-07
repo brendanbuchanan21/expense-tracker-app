@@ -97,6 +97,7 @@
     display: flex;
     border-bottom: .5px solid hsl(0, 0%, 40%);
     cursor: pointer;
+    background-color: black;
 }
 .individual-account-balance-page-description-div {
     height: 3rem;

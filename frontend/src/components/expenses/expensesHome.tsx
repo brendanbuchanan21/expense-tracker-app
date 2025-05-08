@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useGetLastThirtyTransactionsApiQuery } from '../../redux/apis/transactionsApi';
 import { ImSpinner } from 'react-icons/im';
 import SpendingLineChart from './chartComponent';
+import PieChartComponent from './pieChart';
 
 const ExpensesHome = () => {
 
@@ -38,6 +39,29 @@ const ExpensesHome = () => {
   }));
 
   console.log(chartData, '🌟')
+
+
+  const selectedTransactions = activeTab === 'Spending'
+  ? spendings.map((s: { date: string; amount: string }) => ({
+      date: s.date,
+      amount: parseFloat(s.amount),
+    }))
+  : earnings.map((s: { date: string; amount: string }) => ({
+      date: s.date,
+      amount: parseFloat(s.amount),
+    }));
+
+     // Conditional variable assignment
+    const aggregatedData = activeTab === 'Spending'
+    ? spendings.map((s: { date: string; amount: string; category: string }) => ({
+        amount: s.amount,
+        category: s.category,
+      }))
+    : earnings.map((s: { date: string; amount: string; category: string }) => ({
+        amount: s.amount,
+        category: s.category,
+      }));
+      
 
     return (
       <div className='display-container'>
@@ -80,19 +104,14 @@ const ExpensesHome = () => {
 
           <SwiperSlide>
             <div id='graph'>
-            <SpendingLineChart
-            transactions={spendings.map((s: { date: string; amount: string }) => ({
-              date: s.date,
-              amount: parseFloat(s.amount),
-            }))}
-          />
+            <SpendingLineChart transactions={selectedTransactions}/>
             </div>
           </SwiperSlide>
 
           <SwiperSlide>
             <div id='graph'>
-              <p>Spending Categories</p>
-              <p>Food, Travel, Misc</p>
+           <PieChartComponent data={aggregatedData}/>
+
             </div>
           </SwiperSlide>
         </Swiper>

@@ -66,7 +66,7 @@ const SpendingLineChart = ({ transactions }: SpendingLineChartProps) => {
             interval="preserveStartEnd"
             minTickGap={20}
           />
-          <YAxis />
+          <YAxis tickFormatter={(value: number) => `$${value}`}/>
           <Tooltip
             labelFormatter={(label) => formatDateLabel(label)}
             formatter={(value) => [`$${value}`, 'Amount']}

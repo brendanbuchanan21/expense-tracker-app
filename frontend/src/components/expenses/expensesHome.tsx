@@ -31,8 +31,13 @@ const ExpensesHome = () => {
   }, 0)
   console.log(earningsThirtyDayTotal, 'total earnings');
 
+  // Map the data to match the expected structure for the chart
+  const chartData = spendings.map((s: any) => ({
+    date: s.date,
+    amount: parseFloat(s.amount),
+  }));
 
-
+  console.log(chartData, '🌟')
 
     return (
       <div className='display-container'>
@@ -75,10 +80,12 @@ const ExpensesHome = () => {
 
           <SwiperSlide>
             <div id='graph'>
-              <SpendingLineChart data={spendings.map((s: any) => ({
-        date: s.date,
-        amount: parseFloat(s.amount),
-      }))}/>
+            <SpendingLineChart
+            transactions={spendings.map((s: { date: string; amount: string }) => ({
+              date: s.date,
+              amount: parseFloat(s.amount),
+            }))}
+          />
             </div>
           </SwiperSlide>
 

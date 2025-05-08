@@ -50,6 +50,12 @@
 #graph p {
     margin: 0;
 }
+#chart-inside {
+    width: 100%;        /* Ensure it takes up the full width */
+  height: 200px;      /* Define a fixed height or use minHeight */
+  min-height: 100px; 
+    padding-right: 2rem;
+}
 .expenses-tab-container {
     border-bottom: .5px solid hsl(0,0%, 20%);
     height: 1.5rem;

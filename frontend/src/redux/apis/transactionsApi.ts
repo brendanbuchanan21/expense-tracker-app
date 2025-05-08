@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 
 export const transactionApi = createApi({
     reducerPath: 'transactionApi',
+    tagTypes: ['Transactions'] as const,
     baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/finances/transactions/', prepareHeaders: async (headers) => {
         const auth = getAuth();
         const user = auth.currentUser;
@@ -19,7 +20,8 @@ export const transactionApi = createApi({
                     url: '/',
                     method: "POST",
                     body: transaction
-                })
+                }),
+                invalidatesTags: ['Transactions'],
             }),
             getAllTransactions: builder.query({
                 query: (accountId) => ({
@@ -31,7 +33,8 @@ export const transactionApi = createApi({
                 query: () => ({
                     url: '/last-thirty/',
                     method: "GET",
-                })
+                }),
+                providesTags: ['Transactions'],
             })
         })
 })

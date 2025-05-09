@@ -4,17 +4,17 @@ from rest_framework.response import Response
 from ..serializers.Transaction_serializer import TransactionSerializer
 from ..models.account_model import MoneyAccount
 from ..models.user_model import FirebaseUser
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.utils import timezone
 from ..models.transactionsModel import Transaction
 
 
-class LastThirtyView(APIView):
+class TransactionRangeView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
 
     def get(self, request):
-
+        print('🌕');
         #first get the users id
         firebase_uid = request.user.uid
         if not firebase_uid:
@@ -29,9 +29,26 @@ class LastThirtyView(APIView):
         accounts = MoneyAccount.objects.filter(user=firebase_user)
         print('💧', accounts)
 
-        thirty_days_ago = timezone.now() - timedelta(days=30)
-        transactions = Transaction.objects.filter(account__in=accounts, date__gte=thirty_days_ago)
 
+        # Get the 'start' and 'end' dates from query parameters
+        start_date_str = request.query_params.get('start', None)
+        end_date_str = request.query_params.get('end', None)
+        print('🐼 Start:', start_date_str, 'End:', end_date_str)
+
+        if not start_date_str or not end_date_str:
+            return Response({'error': 'Both start and end dates must be provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Parse the 'start' and 'end' dates into proper datetime objects
+        try:
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d')  # Ensure the date format is consistent
+            end_date = datetime.strptime(end_date_str, '%Y-%m-%d') + timedelta(days=1)  # Include the full end day
+        except ValueError:
+            return Response({'error': 'Invalid date format, use YYYY-MM-DD'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Fetch transactions for the given date range
+        transactions = Transaction.objects.filter(account__in=accounts, date__gte=start_date, date__lt=end_date)
+
+       
         spendings = transactions.filter(type="Withdrawal")
         earnings = transactions.filter(type="Deposit")
 

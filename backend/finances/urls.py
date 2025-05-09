@@ -2,7 +2,7 @@ from django.urls import path
 from .views.user_data_view import register_or_get_user, upload_profile_picture
 from .views.account_view import AccountView
 from .views.transaction_view import TransactionView
-from .views.last_thirty_transaction_view import LastThirtyView
+from .views.transaction_range_view import TransactionRangeView
 
 
 urlpatterns = [
@@ -11,5 +11,5 @@ urlpatterns = [
     path('accounts/', AccountView.as_view(), name='account'),
     path('transactions/', TransactionView.as_view(), name='create-transaction'),
     path('transactions/<int:account_id>/', TransactionView.as_view(), name='get-transactions'),
-    path('transactions/last-thirty/', LastThirtyView.as_view(), name='last-thirty')
+    path('transactions/by-range/', TransactionRangeView.as_view(), name='transaction-range')
 ]

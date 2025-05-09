@@ -29,9 +29,9 @@ export const transactionApi = createApi({
                     method: "GET",
                 })
             }),
-            getLastThirtyTransactionsApi: builder.query({
-                query: () => ({
-                    url: '/last-thirty/',
+            getTransactionByRange: builder.query({
+                query: ({start, end}) => ({
+                    url: `/by-range/?start=${start}&end=${end}`,
                     method: "GET",
                 }),
                 providesTags: ['Transactions'],
@@ -39,4 +39,4 @@ export const transactionApi = createApi({
         })
 })
 
-export const { useAddTransactionApiMutation, useGetAllTransactionsQuery, useGetLastThirtyTransactionsApiQuery } = transactionApi;
+export const { useAddTransactionApiMutation, useGetAllTransactionsQuery, useGetTransactionByRangeQuery } = transactionApi;

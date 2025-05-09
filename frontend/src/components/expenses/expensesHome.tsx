@@ -5,52 +5,57 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css'
 import { useEffect, useState } from 'react';
-import { useGetLastThirtyTransactionsApiQuery } from '../../redux/apis/transactionsApi';
+import { useGetTransactionByRangeQuery} from '../../redux/apis/transactionsApi';
 import { ImSpinner } from 'react-icons/im';
 import SpendingLineChart from './chartComponent';
 import PieChartComponent from './pieChart';
 import DaysPopUP from './daysPopUp';
 import './daysPopUp.css'
 
+
+const getStartAndEndDates = (selected: string): { start: string; end: string } => {
+  const now = new Date();
+
+  if (selected === 'Last 30 Days') {
+    const start = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+    return {
+      start: start.toISOString().split('T')[0],
+      end: now.toISOString().split('T')[0],
+    };
+  }
+
+  const [monthName, yearStr] = selected.split(' ');
+  const year = parseInt(yearStr);
+  const month = new Date(`${monthName} 1, ${year}`).getMonth();
+
+  const start = new Date(year, month, 1);
+  const end = new Date(year, month + 1, 0);
+
+  return {
+    start: start.toISOString().split('T')[0],
+    end: end.toISOString().split('T')[0],
+  };
+};
+
 const ExpensesHome = () => {
-
-  // const data = [{description: 'cocacola', date: '05-06-2025', type: 'Withdrawal', amount: 4.00, category: 'miscellaneous', id: '1'}];
-
-  
   // default last 30 days of transactions for spending
-  const { data, isLoading } = useGetLastThirtyTransactionsApiQuery(undefined);
-  console.log('🌎', data);
-  const spendings = data?.spendings || [];
-  const earnings = data?.earnings || [];
+  
+  
+  
   const [activeTab, setActiveTab] = useState('Spending');
   const [lastThirtyPopUp, setLastThirtyPopUp] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string>("Last 30 Days");
+  const [dateOptions, setDateOptions] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (selectedDate === "Last 30 Days") {
-      
-    }
 
-  }, [selectedDate])
-
-  const spendingsThirtyDayTotal = spendings.reduce((acc: number, transaction: any) => {
-    return acc + parseFloat(transaction.amount);
-  }, 0);
-  console.log(spendingsThirtyDayTotal, 'here is the total amount for spendings')
-
-  const earningsThirtyDayTotal = earnings.reduce((acc: number, transaction: any) => {
-    return acc + parseFloat(transaction.amount)
-  }, 0)
-  console.log(earningsThirtyDayTotal, 'total earnings');
-
-  // Map the data to match the expected structure for the chart
-  const chartData = spendings.map((s: any) => ({
-    date: s.date,
-    amount: parseFloat(s.amount),
-  }));
-
-  console.log(chartData, '🌟')
-  console.log('current selected date', selectedDate);
+  const { start, end } = getStartAndEndDates(selectedDate);
+  const { data, isLoading } = useGetTransactionByRangeQuery({ start, end });
+  const spendings = data?.spendings || [];
+  const earnings = data?.earnings || [];
+  const spendingsTotal = spendings.reduce((acc: number, t: any) => acc + parseFloat(t.amount), 0);
+  const earningsTotal = earnings.reduce((acc: number, t: any) => acc + parseFloat(t.amount), 0);
+  
+  console.log('here is the backend response', data);
 
   const selectedTransactions = activeTab === 'Spending'
   ? spendings.map((s: { date: string; amount: string }) => ({
@@ -73,6 +78,28 @@ const ExpensesHome = () => {
         category: s.category,
       }));
       
+
+
+      const generateDateOptions = () => {
+        const options = ["Last 30 Days"];
+        const now = new Date();
+      
+        for (let i = 0; i < 4; i++) {
+          const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+          const month = date.toLocaleString("default", { month: "long" });
+          const year = date.getFullYear();
+          options.push(`${month} ${year}`);
+        }
+      
+        return options;
+      };
+      
+      
+
+      useEffect(() => {
+        setDateOptions(generateDateOptions());
+      }, []);
+
     
 
     
@@ -101,13 +128,13 @@ const ExpensesHome = () => {
                 {activeTab === 'Spending' ? (
                   <>
                   <p>You Spent</p>
-                  <p>${spendingsThirtyDayTotal.toFixed(2)}</p>
+                  <p>${spendingsTotal.toFixed(2)}</p>
                   <p>Last 30 days</p>
                   </>
                 ) : (
                   <>
                   <p>You Earned</p>
-                  <p>${earningsThirtyDayTotal.toFixed(2)}</p>
+                  <p>${earningsTotal.toFixed(2)}</p>
                   <p>Last 30 days</p>
                   </>
                 )}
@@ -150,7 +177,7 @@ const ExpensesHome = () => {
      <div>
      {lastThirtyPopUp && (
       <div className='overlay'>
-      <DaysPopUP onClose={() => setLastThirtyPopUp(false)} selected={selectedDate} onSelect={setSelectedDate}/>
+      <DaysPopUP onClose={() => setLastThirtyPopUp(false)} selected={selectedDate} onSelect={setSelectedDate} dateOptions={dateOptions}/>
       </div>
    )}
    </div>

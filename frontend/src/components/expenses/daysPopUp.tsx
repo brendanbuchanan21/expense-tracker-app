@@ -18,7 +18,10 @@ const DaysPopUP: React.FC<DaysPopUpProps> = ({ onClose, selected, onSelect, date
         <button onClick={onClose} className="date-pop-up-close-btn">Close</button>
         <p>All Transactions</p>
         {dateOptions.map((label, index) => (
-            <div className="date-div" key={index} onClick={() => onSelect(label)}>
+            <div className="date-div" key={index} onClick={() => {
+              onSelect(label);
+              onClose();
+              }}>
                 <p>{label}</p>
                 <button className={selected === label ? 'active-select-date-btn' : 'date-select-btn'} ></button>
             </div>

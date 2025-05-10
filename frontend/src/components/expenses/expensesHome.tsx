@@ -11,6 +11,11 @@ import SpendingLineChart from './chartComponent';
 import PieChartComponent from './pieChart';
 import DaysPopUP from './daysPopUp';
 import './daysPopUp.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { useGetAllAccountsApiQuery } from '../../redux/apis/accountApi';
+import { RootState } from '../../redux/store';
+import { Account } from '../../redux/accountSlice';
+import { addAccount } from '../../redux/accountSlice';
 
 
 const getStartAndEndDates = (selected: string): { start: string; end: string } => {
@@ -40,13 +45,28 @@ const getStartAndEndDates = (selected: string): { start: string; end: string } =
 const ExpensesHome = () => {
   // default last 30 days of transactions for spending
   
+  // redux state
+  const accountsInRedux = useSelector((state: RootState) => state.accounts.accounts);
+  const dispatch = useDispatch();
   
+     //rtk queries
+     const { data: fetchedAccounts, } = useGetAllAccountsApiQuery(undefined, {
+      skip: accountsInRedux.length > 0
+    })
+  
+    useEffect(() => {
+      if (fetchedAccounts && fetchedAccounts.length > 0) {
+          fetchedAccounts.forEach((account: Account) => {
+              dispatch(addAccount(account))
+          });
+      }
+    }, [fetchedAccounts, dispatch])
   
   const [activeTab, setActiveTab] = useState('Spending');
   const [lastThirtyPopUp, setLastThirtyPopUp] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string>("Last 30 Days");
   const [dateOptions, setDateOptions] = useState<string[]>([]);
-
+  console.log(selectedDate, 'this is the selected time period');
 
   const { start, end } = getStartAndEndDates(selectedDate);
   const { data, isLoading } = useGetTransactionByRangeQuery({ start, end });
@@ -78,7 +98,6 @@ const ExpensesHome = () => {
         category: s.category,
       }));
       
-
 
       const generateDateOptions = () => {
         const options = ["Last 30 Days"];
@@ -129,13 +148,13 @@ const ExpensesHome = () => {
                   <>
                   <p>You Spent</p>
                   <p>${spendingsTotal.toFixed(2)}</p>
-                  <p>Last 30 days</p>
+                  <p>{selectedDate}</p>
                   </>
                 ) : (
                   <>
                   <p>You Earned</p>
                   <p>${earningsTotal.toFixed(2)}</p>
-                  <p>Last 30 days</p>
+                  <p>{selectedDate}</p>
                   </>
                 )}
               </>
@@ -152,7 +171,12 @@ const ExpensesHome = () => {
 
           <SwiperSlide>
             <div id='graph'>
-           <PieChartComponent data={aggregatedData}/>
+              {aggregatedData.length < 1 ? (
+                <p>No data from this time period</p>
+              ) : (
+                <PieChartComponent data={aggregatedData}/>
+              )}
+           
 
             </div>
           </SwiperSlide>
@@ -162,7 +186,7 @@ const ExpensesHome = () => {
       <div className='expenses-section'>
 
         <div className='expenses-tab-container'>
-          <button onClick={() => setLastThirtyPopUp(true)}>Last 30 days</button>
+          <button onClick={() => setLastThirtyPopUp(true)}>{selectedDate}</button>
           <button>All Accounts</button>
           <button>Amount: High to Low</button>
         </div>

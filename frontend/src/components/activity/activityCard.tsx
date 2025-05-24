@@ -16,7 +16,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({data}) => {
                 <p className='activity-description-text'>{data.category} {data.date}</p>
             </div>
             <div className="activity-card-header-amount">
-                <p>{data.amount}</p>
+                <p>{data.type === "Deposit" ? `+$${data.amount}` : `-$${data.amount}`}</p>
             </div>
         </div>
     )

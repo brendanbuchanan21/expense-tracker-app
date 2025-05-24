@@ -33,13 +33,18 @@ const ActivityHome = () => {
 
     return (
         <div className="activity-home">
-            {allTransactions.length >= 1 ? (
+            <p className="activity-page-header-text">Last 30 days of activity</p>
+            <div className="activity-cards-div">
+                {allTransactions.length >= 1 ? (
                  allTransactions.map((transaction) => (
                 <ActivityCard key={transaction.id} data={transaction}/>
+                
             ))
             ) : (
-                <p>no activity yet</p>
+                <p>no activity in the last 30 days</p>
             )}
+            </div>
+            
            
         </div>
     );

@@ -1,8 +1,35 @@
 
 .activity-home {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    
+}
+.activity-page-header-text {
+    margin: 0;
+    padding: 0 0.8rem;
+    border-bottom: .5px solid hsl(0, 0%, 70%);
+}
+.activity-cards-div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-height: 16rem;
+    overflow-y: auto;
+}
+.activity-cards-div::-webkit-scrollbar {
+  width: 8px; /* Adjust width */
 }
 
+.activity-cards-div::-webkit-scrollbar-track {
+  background: transparent; /* Or a light gray if you prefer */
+}
+
+.activity-cards-div::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* Scrollbar handle */
+  border-radius: 4px;
+}
 .activity-card {
     display: flex;
     flex-direction: row;
@@ -12,6 +39,7 @@
     max-height: 4rem;
     line-height: .4rem;
     padding: 0 .5rem;
+    background-color: hsl(0, 0%, 15%);
 }
 
 .activity-card-header-text {

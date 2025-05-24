@@ -1,15 +1,22 @@
 import './activity.css'
+import React from 'react'
 
+interface ActivityCardProps {
+    data: any;
+}
 
-const ActivityCard = () => {
+const ActivityCard: React.FC<ActivityCardProps> = ({data}) => {
+
+    if (!data)  return null;
+    console.log('child data', '🐱');
     return (
-        <div className="activity-card">
+             <div className="activity-card" >
             <div className="activity-card-header-text">
-                <p>Returned TV</p>
-                <p className='activity-description-text'>Shopping and fun 3/15</p>
+                <p>{data.description}</p>
+                <p className='activity-description-text'>{data.category} {data.date}</p>
             </div>
             <div className="activity-card-header-amount">
-                <p>$500.01</p>
+                <p>{data.amount}</p>
             </div>
         </div>
     )

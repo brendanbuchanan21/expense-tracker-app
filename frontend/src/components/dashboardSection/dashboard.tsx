@@ -4,6 +4,7 @@ import Navbar from './navbar';
 import BalanceHome from '../balances/balanceHome';
 import ExpensesHome from '../expenses/expensesHome';
 import { useNavigate } from 'react-router-dom';
+import ActivityHome from '../activity/activityHome';
 
 const Dashboard = () => {
 
@@ -36,7 +37,7 @@ const Dashboard = () => {
             <h3>{tabSelected}</h3>
              </div>
             <div className='display-container'>
-            <p>get started to see your activity</p>
+            <ActivityHome />
            </div>
             </>
         )}

@@ -57,7 +57,7 @@ form input:-webkit-autofill {
     padding: .5rem;
     width: 90%;
 }
-button:hover {
+sing-up-btn:hover {
     background-color: var(--hover-orange);
     cursor: pointer;
 }

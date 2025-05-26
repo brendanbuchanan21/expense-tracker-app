@@ -5,6 +5,7 @@ import BalanceHome from '../balances/balanceHome';
 import ExpensesHome from '../expenses/expensesHome';
 import { useNavigate } from 'react-router-dom';
 import ActivityHome from '../activity/activityHome';
+import SettingsComponent from '../settings/settings-page';
 
 const Dashboard = () => {
 
@@ -65,6 +66,18 @@ const Dashboard = () => {
                 <ExpensesHome />
             </div>
             </>
+        )}
+        {tabSelected === "Settings" && (
+          <>
+           <div className="dashboard-header-div">
+            <h3>{tabSelected}</h3>
+             </div>
+
+            <div>
+          <SettingsComponent />
+            </div>
+          
+          </>
         )}
         
         <Navbar tabSelected={tabSelected} setTabSelected={handleTabChange}/>

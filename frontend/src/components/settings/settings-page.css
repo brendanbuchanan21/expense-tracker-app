@@ -1,0 +1,45 @@
+.settings-main-container {
+    min-height: 20rem;
+    padding: 1rem;
+}
+
+.sign-out-text {
+    border-bottom: 1px solid hsl(0, 0%, 40%);
+    cursor: pointer;
+    color: hsl(0, 0%, 40%);
+}
+.hidden-text {
+    display: none;
+}
+.sign-out-button {
+    border-bottom: 1px solid hsl(0, 0%, 40%);
+    cursor: pointer;
+}
+
+.sign-out-button:hover { 
+    color: hsl(0, 0%, 40%);
+}
+.sign-out-btns-div {
+    display: flex;
+    gap: 1rem;
+}
+.cancel-btn {
+    width: 6rem;
+    height: 1.4rem;
+    border: none;
+    border-radius: 2px;
+}
+.cancel-btn:hover {
+    cursor: pointer;
+}
+.confirm-sign-out-btn {
+    background-color: var(--orange);
+    width: 6rem;
+    height: 1.4rem;
+    border: none;
+    border-radius: 2px;
+}
+.confirm-sign-out-btn:hover {
+    background-color: var(--hover-orange);
+    cursor: pointer;
+}

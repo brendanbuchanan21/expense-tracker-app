@@ -34,8 +34,9 @@
     border-top: 1px solid gray;
     display: flex;
     flex-direction: row;
-    gap: 4rem;
+    gap: 3rem;
     justify-content: center;
+    align-items: center;
 }
 
 .active {
@@ -49,4 +50,7 @@
 .navbar-title:hover {
     cursor: pointer;
     color: hsl(0, 0%, 50%);
+}
+.settings-icon {
+    cursor: pointer;
 }

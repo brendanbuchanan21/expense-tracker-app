@@ -38,7 +38,7 @@ const IntroComponent = () => {
             </div>
 
             <div className='get-started-div'>
-                <button onClick={handleNextPage}>Create New Account</button>
+                <button onClick={handleNextPage} className='create-new-account-btn'>Create New Account</button>
             </div>
             <div className='login-text-div'>
                 <p>Already have an account? <span className='login-text' onClick={() => navigate('/login')}>Login</span></p>

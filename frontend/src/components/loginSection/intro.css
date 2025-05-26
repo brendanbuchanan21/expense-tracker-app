@@ -58,7 +58,7 @@ section {
     align-items: center;
     justify-content: center;
 }
-.get-started-div button {
+.create-new-account-btn {
     height: 2rem;
     width: 14rem;
     background-color: var(--orange);
@@ -66,7 +66,7 @@ section {
     border-radius: 3rem;
     cursor: pointer;
 }
-.get-started-div button:hover {
+.create-new-account-btn:hover {
     background-color: var(--hover-orange);
   }
 

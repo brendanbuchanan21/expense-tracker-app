@@ -9,7 +9,6 @@ export const userDataApi = createApi({
         const user = auth.currentUser;
         if (user) {
             const token = await user.getIdToken();
-            console.log('Token attached:', token);
             headers.set('Authorization', `Bearer ${token}`)
         }
         return headers;
@@ -31,9 +30,9 @@ export const userDataApi = createApi({
             body: formData,
         })
     }),
-    deleteProfileData: builder.mutation({
+    deleteProfileData: builder.mutation<void, void>({
         query: () => ({
-            url: 'user-data/',
+            url: 'user-delete/',
             method: "DELETE"
         })
     }),

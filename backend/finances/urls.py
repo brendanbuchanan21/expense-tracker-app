@@ -13,6 +13,6 @@ urlpatterns = [
     path('transactions/', TransactionView.as_view(), name='create-transaction'),
     path('transactions/<int:account_id>/', TransactionView.as_view(), name='get-transactions'),
     path('transactions/by-range/', TransactionRangeView.as_view(), name='transaction-range'),
-    path('user-data/', delete_user_data, name='delete-user-data'),
+    path('user-delete/', delete_user_data, name='delete-user-data'),
     path('user-reset/', reset_user_data, name='user-reset'),
 ]

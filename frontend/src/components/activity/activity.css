@@ -18,6 +18,9 @@
     max-height: 16rem;
     overflow-y: auto;
 }
+.no-activity-text {
+    padding-left: 1rem;
+}
 .activity-cards-div::-webkit-scrollbar {
   width: 8px; /* Adjust width */
 }

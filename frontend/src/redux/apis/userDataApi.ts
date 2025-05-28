@@ -30,9 +30,21 @@ export const userDataApi = createApi({
             method: "POST",
             body: formData,
         })
+    }),
+    deleteProfileData: builder.mutation({
+        query: () => ({
+            url: 'user-data/',
+            method: "DELETE"
+        })
+    }),
+    resetUserData: builder.mutation<void, void>({
+        query: () => ({
+            url: 'user-reset/',
+            method: "DELETE"
+        })
     })
     //another mutation
 }),
 });
 
-export const { usePostUserDataMutation, usePostUserProfilePictureMutation } = userDataApi;
+export const { usePostUserDataMutation, usePostUserProfilePictureMutation, useDeleteProfileDataMutation, useResetUserDataMutation } = userDataApi;

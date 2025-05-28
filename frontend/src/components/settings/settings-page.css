@@ -2,7 +2,19 @@
     min-height: 20rem;
     padding: 1rem;
 }
-
+.reset-data-spinner {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from {
+    /* At the start of the animation (0%), rotate 0 degrees */
+    transform: rotate(0deg);
+  }
+  to {
+    /* At the end of the animation (100%), rotate 360 degrees (a full circle) */
+    transform: rotate(360deg);
+  }
+}
 .sign-out-text {
     border-bottom: 1px solid hsl(0, 0%, 40%);
     cursor: pointer;
@@ -43,3 +55,4 @@
     background-color: var(--hover-orange);
     cursor: pointer;
 }
+

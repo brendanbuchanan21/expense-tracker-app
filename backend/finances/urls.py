@@ -3,6 +3,7 @@ from .views.user_data_view import register_or_get_user, upload_profile_picture
 from .views.account_view import AccountView
 from .views.transaction_view import TransactionView
 from .views.transaction_range_view import TransactionRangeView
+from .views.user_data_view import delete_user_data, reset_user_data
 
 
 urlpatterns = [
@@ -11,5 +12,7 @@ urlpatterns = [
     path('accounts/', AccountView.as_view(), name='account'),
     path('transactions/', TransactionView.as_view(), name='create-transaction'),
     path('transactions/<int:account_id>/', TransactionView.as_view(), name='get-transactions'),
-    path('transactions/by-range/', TransactionRangeView.as_view(), name='transaction-range')
+    path('transactions/by-range/', TransactionRangeView.as_view(), name='transaction-range'),
+    path('user-data/', delete_user_data, name='delete-user-data'),
+    path('user-reset/', reset_user_data, name='user-reset'),
 ]

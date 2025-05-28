@@ -1,6 +1,6 @@
 
-
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from ..models.user_model import FirebaseUser
@@ -69,3 +69,39 @@ def upload_profile_picture(request):
 
 
     return Response({"message": "Profile picture updated successfully."}, status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_user_data(request):
+    firebase_uid = request.user.uid
+
+    try: 
+        user = FirebaseUser.objects.get(firebase_uid=firebase_uid)
+        user.delete()
+
+        return Response({'message': 'User data deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    
+    except FirebaseUser.DoesNotExist:
+        return Response({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def reset_user_data(request):
+    firebase_uid = request.user.uid
+
+    try:
+        #delete all accounts and cascade to transactions
+        user = FirebaseUser.objects.get(firebase_uid=firebase_uid)
+
+        user.accounts.all().delete()
+
+        if hasattr(user, 'profile_picture'):
+            user.profile_picture.delete()
+        
+        return Response({"message": "user data reset successful"}, status=status.HTTP_204_NO_CONTENT)
+
+
+    except FirebaseUser.DoesNotExist:
+        return Response({"error": 'user not found'}, status=status.HTTP_404_NOT_FOUND)

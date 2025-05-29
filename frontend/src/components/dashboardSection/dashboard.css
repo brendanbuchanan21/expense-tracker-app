@@ -54,3 +54,15 @@
 .settings-icon {
     cursor: pointer;
 }
+
+@media (max-width: 800px) {
+    .home-section {
+        padding-top: 5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .main-container {
+        width: 20rem;
+    }
+}

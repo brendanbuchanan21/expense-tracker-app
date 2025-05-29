@@ -77,12 +77,13 @@ section {
     text-align: center;
   }
   .login-text-div p {
- font-size: .9rem;
- color: grey;
+    font-size: .9rem;
+    color: grey;
   }
   .login-text {
     color: white;
     cursor: pointer;
+    padding-left: 5px;
   }
   .login-text:hover {
     color: grey;
@@ -91,3 +92,15 @@ section {
   .sign-in-header-text {
     text-align: center;
   }
+
+  @media (max-width: 600px) {
+
+    .intro-div {
+        padding-top: 5rem;
+        width: 20rem;
+    }
+
+    .intro-div h1 {
+        font-size: 1.5rem;
+    }
+  } 

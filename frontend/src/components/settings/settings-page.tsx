@@ -24,6 +24,8 @@ const SettingsComponent = () => {
       try {
         await signOut(auth);
         navigate('/login');
+        // need to remove the memory of the page we were on
+        localStorage.removeItem('selectedTab');
       } catch (error) {
         console.error('Error signing out:', error);
       }
@@ -39,6 +41,8 @@ const SettingsComponent = () => {
         } 
         setShowDeleteAccount(false);
         navigate('/');
+        // need to remove the memory of the page we were on
+        localStorage.removeItem('selectedTab');
       } catch (error) {
         console.error('could not successfully delete your account')
       }

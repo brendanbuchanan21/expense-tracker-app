@@ -65,5 +65,7 @@
     .main-container {
         width: 20rem;
     }
-    
+    .navbar-container {
+        gap: 1.5rem;
+    }
 }

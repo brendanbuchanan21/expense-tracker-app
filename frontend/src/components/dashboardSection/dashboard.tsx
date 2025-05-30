@@ -24,6 +24,7 @@ const Dashboard = () => {
   const initialTab = localStorage.getItem('selectedTab') || 'Activity';
   const [tabSelected, setTabSelected] = useState(initialTab);
 
+  //upon sign out functionality... we can reset the intial tab storage
   
 
     return (

@@ -37,7 +37,8 @@ const CheckingComponent = () => {
             </div>
             
                 {activeChecking && (
-                checkingAccounts.map((account) => (
+                checkingAccounts.length > 0 ? (
+                   checkingAccounts.map((account) => (
                 <div className='individual-account-balance-page-div' key={account.id} onClick={() => {
                    handleAccountClick(account)
                 }}>
@@ -50,6 +51,12 @@ const CheckingComponent = () => {
                 </div>
                 </div>
                 ))
+                ) : (
+                   <>
+                  <div className='individual-account-balance-page-div'><p className='account-no-activity-text'>No activity yet</p></div>
+                  </>
+                )
+               
                 )} 
                 
             </>

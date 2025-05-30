@@ -28,7 +28,9 @@ const SavingsComponent = () => {
 
     return (
     <>
-    <div className={activeSavings ? 'active-account-section-div' : 'account-section-div'} onClick={() => setActiveSavings(prev => !prev)}>
+    <div className={activeSavings ? 'active-account-section-div' : 'account-section-div'} onClick={() => {
+        console.log('clicked savings!');
+        setActiveSavings(prev => !prev)}}>
         <div className='account-type-div'>
         <IoIosArrowDown className={activeSavings ? 'arrow-rotate' : 'arrow'}/>
         <p>Savings</p>
@@ -39,7 +41,8 @@ const SavingsComponent = () => {
     </div>
         
         {activeSavings && (
-            savingsAccounts.map((account) => (
+            savingsAccounts.length > 0 ? (
+                 savingsAccounts.map((account) => (
             <div className='individual-account-balance-page-div' key={account.id} onClick={() => {
                 handleAccountClick(account);
             }}>
@@ -52,6 +55,12 @@ const SavingsComponent = () => {
                 </div>
             </div>
             ))
+            ) : (
+                 <>
+                <div className='individual-account-balance-page-div'><p className='account-no-activity-text'>No activity yet</p></div>
+                </>
+            )
+           
         )}
   
     </>

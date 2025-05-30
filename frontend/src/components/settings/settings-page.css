@@ -1,7 +1,7 @@
 .settings-main-container {
     min-height: 20rem;
     padding: 1rem;
-    background-color: hsl(0, 0%, 10%);
+   
 }
 .reset-data-spinner {
     animation: spin 1s linear infinite;

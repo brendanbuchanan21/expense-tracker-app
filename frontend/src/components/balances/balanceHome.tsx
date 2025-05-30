@@ -10,6 +10,7 @@ import { FaSpinner } from 'react-icons/fa'
 import CheckingComponent from './checkingTab'
 import SavingsComponent from './savingsTab'
 import LoansComponent from './loansTab.tsx'
+import { MdAccountBalance } from 'react-icons/md'
 
 const BalanceHome = () => {
 
@@ -55,7 +56,12 @@ const BalanceHome = () => {
                 <>
                 <div className='balance-header-main-div'>
                 <div className='header-img-div'>
-                <img src={profilePicture ?? ''} alt="sex-panther"  className='profile-pic'/>
+                    {profilePicture ? (
+                          <img src={profilePicture ?? ''} alt="profile picture" className='profile-pic'/>
+                    ) : ( <MdAccountBalance />
+                        
+                    )}
+              
                 </div>
         
                 <div className='balance-header-money-div'>

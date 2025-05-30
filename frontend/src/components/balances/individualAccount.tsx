@@ -25,7 +25,7 @@ const AccountComponent = () => {
 
     const navigate = useNavigate();
 
-    const { data, error, refetch, isLoading } = useGetAllTransactionsQuery(id)
+    const { data, refetch, isLoading } = useGetAllTransactionsQuery(id)
     console.log(data, 'here is the transaction response');
 
 

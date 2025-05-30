@@ -111,3 +111,16 @@ input[type=number]::-webkit-outer-spin-button {
     }
   }
   
+@media(max-width: 600px) {
+    .add-account-main-container{
+        width: 25rem;
+    }
+}
+@media(max-width: 500px) {
+    #add-account-section {
+        padding-top: 5rem;
+    }
+    .add-account-main-container {
+        width: 20rem;
+    }
+}

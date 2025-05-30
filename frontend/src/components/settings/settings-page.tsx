@@ -16,7 +16,7 @@ const SettingsComponent = () => {
     
 
     // api call 
-    const [resetUserData, {isLoading: isResetLoading, isError}] = useResetUserDataMutation();
+    const [resetUserData, {isLoading: isResetLoading}] = useResetUserDataMutation();
     const [deleteUserData, {isLoading: isDeletingLoading}] = useDeleteProfileDataMutation();
 
   

@@ -109,3 +109,28 @@
       transform: rotate(360deg);
     }
   }
+
+@media (max-width: 450px) {
+  #graph {
+    min-height: 15rem;
+  }
+  .expenses-tab-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  gap: 0.5rem; 
+  padding: 0.5rem;
+  scrollbar-width: none; 
+}
+
+.expenses-tab-container::-webkit-scrollbar {
+  display: none; 
+}
+
+.expenses-tab-container button {
+  flex-shrink: 0; 
+  height: 1.6rem;
+  padding: 0 0.75rem;
+}
+}

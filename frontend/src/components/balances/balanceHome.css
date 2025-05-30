@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 20rem;
 }
 .balance-home-spinner {
     text-align: center;
@@ -120,4 +121,8 @@
 }
 
 
-  
+@media (max-width: 450px) {
+    .display-container {
+        height: 25rem;
+    }
+}

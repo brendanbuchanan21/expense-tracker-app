@@ -1,5 +1,4 @@
 import PictureComponent from './components/loginSection/picture'
-import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import IntroComponent from './components/loginSection/intro'
 import SignUpComponent from './components/loginSection/signup'

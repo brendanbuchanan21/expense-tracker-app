@@ -4,25 +4,27 @@ import { RootState } from "../../redux/store";
 import { useState } from "react";
 import AccountComponent from "./individualAccount";
 import { Account } from "../../redux/accountSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoansComponent = () => {
 
     const accounts = useSelector((state: RootState) => state.accounts.accounts)
-
     //loans account info  
     const loanAccounts = accounts.filter((account) => account.typeOfAccount === "Loans");
     const loanAccountsTotal = loanAccounts.reduce((accumulator, current) => {
       return accumulator + Number(current.balance);
     }, 0)
-    const formattedLoansAccountTotal = loanAccountsTotal.toFixed(2);
-  
+    // give decimal for account total 
+     const formattedLoansAccountTotal = loanAccountsTotal.toFixed(2);
      // use state
     const [activeLoans, setActiveLoans] = useState(false);
-    const [individualAccountPopUp, setIndividualAccountPopUp] = useState(false)
-    const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
-    // onclick, set pop up true,
-    // conditionally render the pop up
-    // pass individual account data into the pop up, obviously 
+    const navigate = useNavigate();
+
+
+
+    const handleAccountClick = (account: Account) => {
+    navigate(`/individual-account/${account.id}`);
+  }
 
     return (
         <>
@@ -32,14 +34,14 @@ const LoansComponent = () => {
         <p>Loans</p>
      </div>
         <div className='money-div'>
-            <p>{loanAccountsTotal > 0 ? loanAccountsTotal : ""}</p>
+            <p>-${formattedLoansAccountTotal}</p>
         </div>
                 </div>
                 {activeLoans && (
                     loanAccounts.length > 0 ? (
                        loanAccounts.map((account) => (
                         <div className='individual-account-balance-page-div' key={account.id} onClick={() => {
-                            setIndividualAccountPopUp(true); setSelectedAccount(account); 
+                            handleAccountClick(account)
                             }}>
                         <div className='individual-account-balance-page-description-div'>
                             <p>{account.accountName}</p>
@@ -56,12 +58,6 @@ const LoansComponent = () => {
                         </>
                     )
                 )} 
-
-                {individualAccountPopUp && selectedAccount && (
-                    <AccountComponent onClose={() => setIndividualAccountPopUp(false)}
-                    account={selectedAccount}
-                    />
-                )}       
         </>
     )
 }

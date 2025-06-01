@@ -13,13 +13,9 @@ import { useGetAllAccountsApiQuery } from '../../redux/apis/accountApi';
 const AccountComponent = () => {
 
     const { id } = useParams<{ id: string }>();
-   
-    
     const navigate = useNavigate();
 
-
   const [addTransaction, setAddTransaction] = useState(false);
-
   const accountId = id ? parseInt(id) : undefined;
 
   const { data: accounts, isLoading: accountsLoading } = useGetAllAccountsApiQuery();
@@ -33,11 +29,10 @@ const AccountComponent = () => {
   const account = accounts?.find((acc: any) => acc.id === accountId);
   if (!account) return <p>Account not found in fetched data</p>;
 
-    
 
-    const closeAccount = () => {
-        navigate('/dashboard')
-    }
+  const closeAccount = () => {
+    navigate('/dashboard')
+  }
 
 
     return (

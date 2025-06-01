@@ -1,7 +1,6 @@
 import addMarker from '../../images/greyAddMarker.svg'
 import './individualAccount.css'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import AddTransactionComponent from './addTransaction';
 import TransactionCard from './transactionCard';

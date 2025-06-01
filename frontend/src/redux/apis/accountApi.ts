@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAuth } from "firebase/auth";
+import { Account } from "../accountSlice";
 
 export const accountApi = createApi({
     reducerPath: 'accountApi',
@@ -22,7 +23,7 @@ export const accountApi = createApi({
 
         })
     }),
-    getAllAccountsApi: builder.query({
+    getAllAccountsApi: builder.query<Account[], void>({
         query: () => ({
             url: '/',
             method: "GET",

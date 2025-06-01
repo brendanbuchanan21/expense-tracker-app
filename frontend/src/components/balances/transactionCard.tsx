@@ -6,7 +6,7 @@ import { Transaction } from "../../redux/accountSlice"
 
 interface TransactionCardProps {
     transactions: Transaction[];
-    activeTab: string;
+    activeTab?: string;
 }
 
 const TransactionCard: React.FC<TransactionCardProps> = ({ transactions, activeTab }) => {

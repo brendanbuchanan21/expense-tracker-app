@@ -46,8 +46,6 @@ const accountSlice = createSlice({
             const { accountId, transaction } = action.payload;
 
             const account = state.accounts.find((account) => account.id === accountId);
-            console.log('accountId', accountId);
-            console.log("Matched account:", JSON.stringify(account, null, 2));
 
             if (account) {
                 if (!account.transactions) {

@@ -66,7 +66,6 @@ const ExpensesHome = () => {
   const [lastThirtyPopUp, setLastThirtyPopUp] = useState(false)
   const [selectedDate, setSelectedDate] = useState<string>("Last 30 Days");
   const [dateOptions, setDateOptions] = useState<string[]>([]);
-  console.log(selectedDate, 'this is the selected time period');
 
   const { start, end } = getStartAndEndDates(selectedDate);
   const { data, isLoading } = useGetTransactionByRangeQuery({ start, end });
@@ -75,7 +74,6 @@ const ExpensesHome = () => {
   const spendingsTotal = spendings.reduce((acc: number, t: any) => acc + parseFloat(t.amount), 0);
   const earningsTotal = earnings.reduce((acc: number, t: any) => acc + parseFloat(t.amount), 0);
   
-  console.log('here is the backend response', data);
 
   const selectedTransactions = activeTab === 'Spending'
   ? spendings.map((s: { date: string; amount: string }) => ({
@@ -113,15 +111,10 @@ const ExpensesHome = () => {
         return options;
       };
       
-      
-
       useEffect(() => {
         setDateOptions(generateDateOptions());
       }, []);
 
-    
-
-    
 
     return (
       <>

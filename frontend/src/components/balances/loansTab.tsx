@@ -2,7 +2,6 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useState } from "react";
-import AccountComponent from "./individualAccount";
 import { Account } from "../../redux/accountSlice";
 import { useNavigate } from "react-router-dom";
 

@@ -8,7 +8,6 @@ interface ActivityCardProps {
 const ActivityCard: React.FC<ActivityCardProps> = ({data}) => {
 
     if (!data)  return null;
-    console.log('child data', '🐱');
     return (
              <div className="activity-card" >
             <div className="activity-card-header-text">

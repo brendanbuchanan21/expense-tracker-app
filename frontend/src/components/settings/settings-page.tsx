@@ -53,7 +53,6 @@ const SettingsComponent = () => {
 
       try {
        await resetUserData().unwrap();
-       console.log(resetUserData);
        setShowResetData(false);
        navigate('/dashboard');
       } catch (error) {

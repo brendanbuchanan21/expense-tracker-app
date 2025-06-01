@@ -24,7 +24,6 @@ useEffect(() => {
       navigate("/picture"); // or /picture or whatever
     } catch (error) {
       console.error(error);
-      console.log('something happened with posting users data via api')
     }
     } else {
       navigate("/check-your-email");

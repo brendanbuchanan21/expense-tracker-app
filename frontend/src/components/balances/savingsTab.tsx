@@ -11,7 +11,6 @@ const SavingsComponent = () => {
     const accounts = useSelector((state: RootState) => state.accounts.accounts)
     const savingsAccounts = accounts.filter((account) => account.typeOfAccount === "Savings");
     //only equates to one savings account
-    console.log('🌻', savingsAccounts)
     const savingsAccountsTotal = savingsAccounts.reduce((accumulator, current) => {
       return accumulator + Number(current.balance);
     }, 0);
@@ -29,7 +28,6 @@ const SavingsComponent = () => {
     return (
     <>
     <div className={activeSavings ? 'active-account-section-div' : 'account-section-div'} onClick={() => {
-        console.log('clicked savings!');
         setActiveSavings(prev => !prev)}}>
         <div className='account-type-div'>
         <IoIosArrowDown className={activeSavings ? 'arrow-rotate' : 'arrow'}/>

@@ -20,7 +20,6 @@ const ActivityHome = () => {
   if (isLoading) return <p>Loading...</p>
   if (error) return <p>Error loading activity. Try refreshing</p>
 
-  console.log('here is the fetched transactions', fetchedTransactions, "🐤");
 
   // we need to combine spendings and earnings into one array
   //then map over the combined array for each card

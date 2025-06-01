@@ -41,8 +41,7 @@ const AddAccount = () => {
     
     // send the query to the backend to post the user data 
     try {
-        const data = await accountApi(account).unwrap()
-        console.log('here is the succesful response from account postage', data)
+        await accountApi(account).unwrap();
         dispatch(addAccount(account));
         navigate('/dashboard', { state: { tab: 'Balances' } });
     } catch (error) {
@@ -50,9 +49,6 @@ const AddAccount = () => {
     } finally {
         setLoading(false);
     }
-   
-
-
 
   }
 

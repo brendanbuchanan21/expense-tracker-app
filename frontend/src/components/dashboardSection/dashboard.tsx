@@ -12,10 +12,6 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
-//somehow i need to create a function that takes in the tab selected in navbar, and set the tab selected to the selected
-// tab, and then i need to set the initial tab value to be the seleceted tab from local storage or activity as
-// default
-
   const handleTabChange = (newTab: string) => {
     setTabSelected(newTab)
     localStorage.setItem('selectedTab', newTab)
@@ -30,8 +26,6 @@ const Dashboard = () => {
     return (
        <section className="home-section">
         <div className='main-container'>
-
-        
 
         {tabSelected === "Activity" && (
             <>

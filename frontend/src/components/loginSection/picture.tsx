@@ -19,8 +19,6 @@ const dispatch = useDispatch();
 //rtk query
 const [postUserProfilePicture] = usePostUserProfilePictureMutation();
 
-
-
 const handleSkip = () => {
 
   navigate('/dashboard');
@@ -67,16 +65,13 @@ const handleSave = async () => {
   console.log(formData, 'huh');
 
   try {
-    const data = await postUserProfilePicture(formData).unwrap();
-    console.log(data, 'image successfully returned');
+    await postUserProfilePicture(formData).unwrap();
 
     navigate('/dashboard')
 
   } catch (error) {
     console.error(error);
   }
-  
-  console.log("image ready to be uplaoded:", image);
 }
 
 

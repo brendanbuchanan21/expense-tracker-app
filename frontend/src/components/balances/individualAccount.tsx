@@ -49,7 +49,7 @@ const AccountComponent = () => {
                 <>
                 <button id='individual-account-close-btn' onClick={closeAccount}>Close</button>
         <div className="account-balance-header-div">
-        <h3>{account.balance}</h3>
+        <h3>{account.typeOfAccount === 'Loans' ? `-$${account.balance}` : `$${account.balance}`}</h3>
         <p>{account.accountName}</p>
         </div>
 

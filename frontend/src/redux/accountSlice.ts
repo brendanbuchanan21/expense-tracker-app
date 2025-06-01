@@ -36,8 +36,12 @@ const accountSlice = createSlice({
     initialState,
     reducers: {
         addAccount: (state, action: PayloadAction<Account>) => {
+        const exists = state.accounts.some(acc => acc.id === action.payload.id);
+        if (!exists) {
             state.accounts.push(action.payload);
+        }
         },
+
         addTransaction: (state, action: PayloadAction<{ accountId: number; transaction: Transaction}>) => {
             const { accountId, transaction } = action.payload;
 

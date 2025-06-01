@@ -6,7 +6,7 @@ import { Transaction } from "../../redux/accountSlice"
 
 interface TransactionCardProps {
     transactions: Transaction[];
-    activeTab: string
+    activeTab: string;
 }
 
 const TransactionCard: React.FC<TransactionCardProps> = ({ transactions, activeTab }) => {
@@ -14,7 +14,52 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ transactions, activeT
 
     return (
         <>
-        {activeTab === 'Spending' ? (
+         {activeTab === 'Spending' ? (
+            transactions.map((transaction) => (
+                <div className='transaction-card' key={transaction.id}>
+                <div className='transaction-img-div'>
+                <FaCoffee  className="icon"/>
+                </div>
+        
+                <div className='transaction-text-div'>
+                <p>{transaction.description}</p>
+                <p className='date-text'>{transaction.date}</p>
+               </div>
+        
+                <div className='transaction-amount-div'>
+                <p className="transaction-amount">{transaction.type === "Deposit" ? `+${transaction.amount}` : `-${transaction.amount}`}</p>
+                </div>
+                </div>
+            ))
+           
+        ) : (
+            transactions.map((transaction) => (
+                <div className='transaction-card' key={transaction.id}>
+            <div className='transaction-img-div'>
+            <FaCoffee  className="icon"/>
+            </div>
+    
+            <div className='transaction-text-div'>
+            <p>{transaction.description}</p>
+            <p className='date-text'>{transaction.date}</p>
+           </div>
+    
+            <div className='transaction-amount-div'>
+            <p className="transaction-amount">{transaction.type === "Deposit" ? `+${transaction.amount}` : `-${transaction.amount}`}</p>
+            </div>
+            </div>
+            ))
+        )}
+        
+        
+        
+        </>
+    )
+}
+export default TransactionCard;
+
+{/*
+    {activeTab === 'Spending' ? (
             transactions.map((transaction) => (
                 <div className='transaction-card' key={transaction.id}>
                 <div className='transaction-img-div'>
@@ -51,10 +96,4 @@ const TransactionCard: React.FC<TransactionCardProps> = ({ transactions, activeT
             ))
         )}
            
-        
-        
-        
-        </>
-    )
-}
-export default TransactionCard;
+    */}

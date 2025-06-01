@@ -20,7 +20,6 @@ const BalanceHome = () => {
   
   // savings account info
   const accounts = useSelector((state: RootState) => state.accounts.accounts)
-  console.log(accounts, 'lol😆');
   const totalmoney = accounts.reduce((accumulator, current) => {
     return accumulator + Number(current.balance)
   },0)
@@ -33,13 +32,17 @@ const BalanceHome = () => {
   })
 
   useEffect(() => {
-    if (fetchedAccounts && fetchedAccounts.length > 0) {
-        fetchedAccounts.forEach((account: Account) => {
-            dispatch(addAccount(account))
-        });
+  if (fetchedAccounts && fetchedAccounts.length > 0) {
+    const idsAlreadyInRedux = new Set(accountsInRedux.map(acc => acc.id));
+    const newAccounts = fetchedAccounts.filter((acc: Account) => !idsAlreadyInRedux.has(acc.id));
+    if (newAccounts.length > 0) {
+      // dispatch an action that adds multiple accounts at once (if you add one)
+      newAccounts.forEach((account: Account) => {
+        dispatch(addAccount(account));
+      });
     }
-  }, [fetchedAccounts, dispatch])
-  
+  }
+}, [fetchedAccounts, accountsInRedux, dispatch]);
     return (
         <>
         <div className={isLoading ? 'display-container-loading' : 'display-container'}>

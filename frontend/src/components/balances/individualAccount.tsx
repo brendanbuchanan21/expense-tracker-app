@@ -1,41 +1,45 @@
 import addMarker from '../../images/greyAddMarker.svg'
 import './individualAccount.css'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import AddTransactionComponent from './addTransaction';
 import TransactionCard from './transactionCard';
 import { useGetAllTransactionsQuery } from '../../redux/apis/transactionsApi';
 import { ImSpinner6 } from 'react-icons/im';
+import { useGetAllAccountsApiQuery } from '../../redux/apis/accountApi';
+
+
 
 const AccountComponent = () => {
 
     const { id } = useParams<{ id: string }>();
-
-    if (!id) {
-        return <div>Account not found!</div>
-    }
-    const accountId = parseInt(id);
-    const account = useSelector((state: RootState) => state.accounts.accounts.find((account) => account.id === accountId));
-    console.log(account);
-    if (!account) {
-        return <div>Account not found!</div>
-    }
-
+   
+    
     const navigate = useNavigate();
 
-    const { data, refetch, isLoading } = useGetAllTransactionsQuery(id)
-    console.log(data, 'here is the transaction response');
 
+  const [addTransaction, setAddTransaction] = useState(false);
 
+  const accountId = id ? parseInt(id) : undefined;
+
+  const { data: accounts, isLoading: accountsLoading } = useGetAllAccountsApiQuery();
+  const { data: transactions, refetch, isLoading: transactionsLoading } = useGetAllTransactionsQuery(id, {
+    skip: !id,
+  });
+
+  if (!id || !accountId) return <p>Account not found</p>;
+  if (accountsLoading) return <div>Loading accounts...</div>;
+
+  const account = accounts?.find((acc: any) => acc.id === accountId);
+  if (!account) return <p>Account not found in fetched data</p>;
+
+    
 
     const closeAccount = () => {
         navigate('/dashboard')
     }
 
-    //use state
-    const [addTransaction, setAddTransaction] = useState(false);
 
     return (
         <section className='individual-account-section'>
@@ -70,12 +74,12 @@ const AccountComponent = () => {
         </div>
 
         <div className='transaction-section'>
-            {isLoading && (
+            {transactionsLoading && (
                 <div>
                     <ImSpinner6 className='transaction-spinner'/>
                 </div>
             )}
-            <TransactionCard transactions={data || []} />
+            <TransactionCard transactions={transactions || []} />
            
         </div>
         </>

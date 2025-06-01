@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
 import './signup.css'
 import { useState } from 'react';
-import { auth } from './firebase.tsx';
+import { auth } from './firebase.ts';
 import { useNavigate } from 'react-router-dom';
 
 

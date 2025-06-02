@@ -9,10 +9,8 @@ export const transactionApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/finances/transactions/`, prepareHeaders: async (headers) => {
         const auth = getAuth();
         const user = auth.currentUser;
-        console.log("🔥 [prepareHeaders] currentUser:", user);
         if (user) {
             const token = await user.getIdToken();
-            console.log("🔑 [prepareHeaders] Token:", token); 
             headers.set('Authorization', `Bearer ${token}`)
         } 
         return headers;

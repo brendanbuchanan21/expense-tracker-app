@@ -2,9 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAuth } from "firebase/auth";
 import { Account } from "../accountSlice";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 export const accountApi = createApi({
     reducerPath: 'accountApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/finances/accounts/', prepareHeaders: async (headers) => {
+    baseQuery: fetchBaseQuery({ baseUrl: `${BASE_URL}/finances/accounts/`, prepareHeaders: async (headers) => {
         const auth = getAuth();
         const user = auth.currentUser
         if(user) {

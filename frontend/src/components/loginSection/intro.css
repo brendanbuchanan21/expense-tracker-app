@@ -21,7 +21,7 @@ section {
 
 }
 .card {
-    border: 1px solid gray;
+    border: 1px solid hsl(0, 0%, 20%);
     border-radius: 4px;
     width: 14rem;
     height: 15rem;
@@ -65,6 +65,7 @@ section {
     border: none;
     border-radius: 3rem;
     cursor: pointer;
+    color: black !important;
 }
 .create-new-account-btn:hover {
     background-color: var(--hover-orange);

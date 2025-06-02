@@ -6,6 +6,9 @@ load_dotenv()
 
 from pathlib import Path
 
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,15 +16,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p43mmf+g%vo&llci*m7&k0vly-(rundm#e7hq3muascxisq#*l'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENVIRONMENT != "production"
 
-ALLOWED_HOSTS = []
-
-
+if ENVIRONMENT == "production":
+    ALLOWED_HOSTS = ["expense-tracker-app-swart-six.vercel.app"]
+else:
+    ALLOWED_HOSTS = ["*"]  # or localhost variations if needed
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,21 +52,29 @@ REST_FRAMEWORK = {
     ),
 }
 
+# CORS config — place this right after REST_FRAMEWORK
+if ENVIRONMENT == "production":
+    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOWED_ORIGINS = [
+        "https://expense-tracker-app-swart-six.vercel.app",
+    ]
+else:
+    CORS_ALLOW_ALL_ORIGINS = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend_project.urls'
 
-#ONLY DURING DEVELOPMENT
-CORS_ALLOW_ALL_ORIGINS = True
+
 
 TEMPLATES = [
     {

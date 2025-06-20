@@ -25,8 +25,10 @@ if not firebase_admin._apps:
             firebase_json = base64.b64decode(firebase_b64).decode('utf-8')
             # Parse JSON string to dict
             firebase_dict = json.loads(firebase_json)
+            print("Firebase credentials loaded successfully in prod")
             cred = credentials.Certificate(firebase_dict)
         except Exception as e:
+            print(f"Failed to parse Firebase credentials: {e}")
             raise ValueError(f"Failed to parse Firebase credentials from environment variable: {e}")
 
     firebase_admin.initialize_app(cred)

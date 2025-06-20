@@ -5,21 +5,29 @@ from rest_framework.authentication import BaseAuthentication
 from django.conf import settings
 import os
 import json
+import base64
 
 # Only initialize Firebase once, and use different methods depending on the environment
 if not firebase_admin._apps:
     if settings.DEBUG:
-        # Development: Load credentials from local JSON file
+        # Dev: load from file
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         firebase_credentials_path = os.path.join(project_root, 'secrets', 'firebase_admin_key.json')
         cred = credentials.Certificate(firebase_credentials_path)
     else:
-        # Production: Load credentials from environment variable
-        firebase_json = os.environ.get("FIREBASE_ADMIN_SDK")
-        if firebase_json is None:
+        # Prod: load from env var (base64 encoded JSON string)
+        firebase_b64 = os.environ.get("FIREBASE_ADMIN_SDK")
+        if not firebase_b64:
             raise ValueError("FIREBASE_ADMIN_SDK environment variable not set.")
-        firebase_dict = json.loads(firebase_json)
-        cred = credentials.Certificate(firebase_dict)
+        
+        try:
+            # Decode base64 to JSON string
+            firebase_json = base64.b64decode(firebase_b64).decode('utf-8')
+            # Parse JSON string to dict
+            firebase_dict = json.loads(firebase_json)
+            cred = credentials.Certificate(firebase_dict)
+        except Exception as e:
+            raise ValueError(f"Failed to parse Firebase credentials from environment variable: {e}")
 
     firebase_admin.initialize_app(cred)
 

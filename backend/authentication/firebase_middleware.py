@@ -51,6 +51,7 @@ class FirebaseWrapper:
 # Custom authentication class
 class FirebaseAuthentication(BaseAuthentication):
     def authenticate(self, request):
+        print("🔥 FirebaseAuthentication hit")
         auth_header = request.headers.get("Authorization")
 
         if not auth_header:

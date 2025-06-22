@@ -17,20 +17,17 @@ class TransactionView(APIView):
         transaction_data = request.data.get('transaction', {})
         account_id = transaction_data.get('account')
 
-        print(f"Request data: {request.data}")
 
 
         firebase_uid = request.user.uid
         try: 
             firebase_user = FirebaseUser.objects.get(firebase_uid=firebase_uid)
-            print('🥶', firebase_user)
         except FirebaseUser.DoesNotExist:
             return Response({"error": 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
         try: 
             account = MoneyAccount.objects.get(id=account_id, user=firebase_user)
-            print('🥎 down under', account)
         except MoneyAccount.DoesNotExist: 
             return Response({"error": "Account not found"}, status=status.HTTP_404_NOT_FOUND)
         
@@ -62,12 +59,10 @@ class TransactionView(APIView):
         firebase_uid = request.user.uid
         try: 
             firebase_user = FirebaseUser.objects.get(firebase_uid=firebase_uid)
-            print('🥶', firebase_user)
         except FirebaseUser.DoesNotExist:
             return Response({"error": 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
         account = get_object_or_404(MoneyAccount, id=account_id, user=firebase_user)
-        print('🌝', account)
 
         transactions = account.transactions.all()
 

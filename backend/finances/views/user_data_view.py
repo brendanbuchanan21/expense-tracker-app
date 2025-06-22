@@ -37,7 +37,6 @@ def register_or_get_user(request):
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def upload_profile_picture(request): 
-    print('🔥view reached')
     user = request.user
 
     print("request.user:", request.user)

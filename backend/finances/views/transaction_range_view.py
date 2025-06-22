@@ -14,7 +14,6 @@ class TransactionRangeView(APIView):
 
 
     def get(self, request):
-        print('🌕')
         #first get the users id
         firebase_uid = request.user.uid
         if not firebase_uid:
@@ -22,18 +21,15 @@ class TransactionRangeView(APIView):
         
         try: 
             firebase_user = FirebaseUser.objects.get(firebase_uid=firebase_uid)
-            print('⭐️', firebase_user)
         except FirebaseUser.DoesNotExist:
             return Response({"error": 'user not found'}, status=status.HTTP_404_NOT_FOUND)
         
         accounts = MoneyAccount.objects.filter(user=firebase_user)
-        print('💧', accounts)
 
 
         # Get the 'start' and 'end' dates from query parameters
         start_date_str = request.query_params.get('start', None)
         end_date_str = request.query_params.get('end', None)
-        print('🐼 Start:', start_date_str, 'End:', end_date_str)
 
         if not start_date_str or not end_date_str:
             return Response({'error': 'Both start and end dates must be provided'}, status=status.HTTP_400_BAD_REQUEST)
@@ -59,10 +55,4 @@ class TransactionRangeView(APIView):
             "spendings": spending_serializer.data,
             "earnings": earnings_serializer.data
         }, status=status.HTTP_200_OK)
-        #now we have firebase id, get firebase user to link to money accounts
-        #once we find all of the money accounts,
-        # get last 30 days transaction in a variable
-        #  split spending and earnings
-        # once split, 
-        # once we have last 30, we need to serialize them 
-        # once serailized, send back to the client 
+        

@@ -25,7 +25,6 @@ class AccountView(APIView):
             
             #now that we have user, find accounts in database
             accounts = firebase_user.accounts.all()
-            print (accounts, '🥺')
             serialized_accounts = AccountSerializer(accounts, many=True)
 
             return Response(serialized_accounts.data, status=status.HTTP_202_ACCEPTED)

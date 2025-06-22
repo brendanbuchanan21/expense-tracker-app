@@ -57,6 +57,7 @@ if ENVIRONMENT == "production":
     CORS_ALLOW_ALL_ORIGINS = False
     CORS_ALLOWED_ORIGINS = [
         "https://expense-tracker-app-swart-six.vercel.app",
+        "https://expense-tracker-app-q8oa.onrender.com",
     ]
 else:
     CORS_ALLOW_ALL_ORIGINS = True

@@ -14,7 +14,7 @@ class TransactionRangeView(APIView):
 
 
     def get(self, request):
-        print('🌕');
+        print('🌕')
         #first get the users id
         firebase_uid = request.user.uid
         if not firebase_uid:

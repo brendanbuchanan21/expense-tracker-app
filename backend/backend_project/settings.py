@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = ENVIRONMENT != "production"
 
 if ENVIRONMENT == "production":
-    ALLOWED_HOSTS = ["expense-tracker-app-swart-six.vercel.app"]
+    ALLOWED_HOSTS = ["expense-tracker-app-q8oa.onrender.com"]
 else:
     ALLOWED_HOSTS = ["*"]  # or localhost variations if needed
 # Application definition

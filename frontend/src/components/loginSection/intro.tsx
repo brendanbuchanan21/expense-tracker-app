@@ -71,13 +71,6 @@ const IntroComponent = () => {
     return () => clearInterval(timer)
   }, [])
 
-  const handleCreateAccount = () => {
-    window.location.href = "/welcome"
-  }
-
-  const handleLogin = () => {
-    window.location.href = "/login"
-  }
 
   return (
     <div className="landing-page">
